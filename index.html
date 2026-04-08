@@ -3,849 +3,394 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MLRO Monthly Report — March 2026</title>
+<title>MLRO Dashboard — Jul 2025 – Mar 2026</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --nu: #820AD1;
-    --nu-light: #A945E8;
-    --nu-bg: #F3E8FF;
-    --bg: #FFFFFF;
-    --bg-page: #F7F7FA;
-    --bg-card: #FFFFFF;
-    --border: #E8E8EE;
-    --border-light: #F0F0F5;
-    --text: #1A1A2E;
-    --text-secondary: #6B6B80;
-    --text-muted: #9999AA;
-    --green: #16A34A;
-    --green-bg: #F0FDF4;
-    --red: #DC2626;
-    --red-bg: #FEF2F2;
-    --amber: #D97706;
-    --amber-bg: #FFFBEB;
-    --blue: #2563EB;
-    --blue-bg: #EFF6FF;
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
-    --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-    --shadow-lg: 0 12px 40px rgba(0,0,0,0.1);
-  }
+:root {
+  --nu:#820AD1;--nu-light:#A945E8;--nu-bg:#F3E8FF;
+  --bg:#FFF;--bg-page:#F5F5F8;--bg-card:#FFF;
+  --border:#E5E5EC;--border-light:#F0F0F5;
+  --text:#1A1A2E;--text-sec:#6B6B80;--text-muted:#9999AA;
+  --green:#16A34A;--green-bg:#F0FDF4;--red:#DC2626;--red-bg:#FEF2F2;
+  --amber:#D97706;--amber-bg:#FFFBEB;--blue:#2563EB;--blue-bg:#EFF6FF;
+  --cyan:#06B6D4;--sidebar-w:220px;
+  --sh-sm:0 1px 3px rgba(0,0,0,.05);--sh-md:0 4px 14px rgba(0,0,0,.07);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg-page);color:var(--text);line-height:1.55}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+/* ── Header ── */
+.header{position:fixed;top:0;left:0;right:0;height:56px;background:var(--bg);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;z-index:200;gap:16px}
+.header-logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;color:var(--nu);white-space:nowrap}
+.header-logo-icon{width:30px;height:30px;background:var(--nu);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:800}
+.header-period{margin-left:auto;display:flex;align-items:center;gap:12px;font-size:12px;color:var(--text-sec)}
+.header-period select{border:1px solid var(--border);border-radius:8px;padding:6px 12px;font:inherit;font-size:12px;background:var(--bg);color:var(--text);cursor:pointer}
+.header-badge{padding:4px 10px;border-radius:6px;background:var(--nu-bg);color:var(--nu);font-size:11px;font-weight:600}
 
-  body {
-    font-family: 'Inter', -apple-system, sans-serif;
-    background: var(--bg-page);
-    color: var(--text);
-    line-height: 1.6;
-    overflow: hidden;
-    height: 100vh;
-  }
+/* ── Sidebar ── */
+.sidebar{position:fixed;left:0;top:56px;bottom:0;width:var(--sidebar-w);background:var(--bg);border-right:1px solid var(--border);overflow-y:auto;padding:16px 10px;z-index:100}
+.sidebar::-webkit-scrollbar{width:3px}
+.sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+.nav-section{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);padding:14px 12px 6px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;cursor:pointer;font-size:12.5px;font-weight:500;color:var(--text-sec);transition:all .15s;border:2px solid transparent;margin-bottom:2px}
+.nav-item:hover{background:var(--bg-page);color:var(--text)}
+.nav-item.active{background:var(--nu-bg);border-color:var(--nu);color:var(--text);font-weight:600}
+.nav-icon{width:24px;text-align:center;font-size:14px;flex-shrink:0}
 
-  /* Top App Bar */
-  .app-bar {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 56px;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    padding: 0 24px;
-    z-index: 200;
-    box-shadow: var(--shadow-sm);
-  }
+/* ── Main ── */
+.main{margin-left:var(--sidebar-w);margin-top:56px;padding:28px 32px 60px;min-height:calc(100vh - 56px)}
+.section{margin-bottom:48px;scroll-margin-top:80px}
+.section-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--nu);margin-bottom:6px}
+.section h2{font-size:20px;font-weight:700;margin-bottom:4px}
+.section .section-sub{font-size:13px;color:var(--text-sec);margin-bottom:20px}
 
-  .app-logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 700;
-    font-size: 15px;
-    color: var(--nu);
-  }
+/* ── KPI Row ── */
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:24px}
+.kpi{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:18px 20px;transition:all .2s;position:relative;overflow:hidden}
+.kpi:hover{border-color:var(--nu);box-shadow:var(--sh-sm)}
+.kpi-label{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);font-weight:600}
+.kpi-val{font-size:26px;font-weight:800;margin-top:2px}
+.kpi-delta{font-size:10.5px;margin-top:3px;font-weight:600}
+.kpi-delta.up{color:var(--green)}.kpi-delta.down{color:var(--red)}.kpi-delta.flat{color:var(--amber)}
+.kpi-spark{position:absolute;right:12px;bottom:10px;opacity:.4;width:70px;height:30px}
 
-  .app-logo-icon {
-    width: 28px; height: 28px;
-    background: var(--nu);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 14px;
-    font-weight: 800;
-  }
+/* ── Chart Grid ── */
+.chart-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.chart-row.full{grid-template-columns:1fr}
+.chart-row.triple{grid-template-columns:1fr 1fr 1fr}
+.chart-box{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:20px 24px;transition:all .2s}
+.chart-box:hover{border-color:var(--nu);box-shadow:var(--sh-sm)}
+.chart-box h3{font-size:12.5px;font-weight:600;color:var(--text-sec);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.chart-box h3 .tag{font-size:9px;padding:2px 7px;border-radius:5px;background:var(--nu-bg);color:var(--nu);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
 
-  .app-title {
-    margin-left: 20px;
-    padding-left: 20px;
-    border-left: 1px solid var(--border);
-    font-size: 13px;
-    color: var(--text-secondary);
-    font-weight: 400;
-  }
+/* ── Table ── */
+.table-wrap{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--bg);margin-bottom:16px}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+table th{text-align:left;padding:10px 14px;background:var(--bg-page);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);border-bottom:1px solid var(--border)}
+table td{padding:9px 14px;border-bottom:1px solid var(--border-light);color:var(--text-sec)}
+table tr:last-child td{border-bottom:none}
+table tr:hover td{background:#FAFAFD}
+table td:first-child{font-weight:600;color:var(--text)}
+table .total td{font-weight:700;color:var(--text);background:var(--nu-bg)}
 
-  .app-nav {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+/* ── Cards ── */
+.cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+.cards-grid.single{grid-template-columns:1fr}
+.card{border:1px solid var(--border);border-radius:14px;padding:22px;transition:all .2s;background:var(--bg)}
+.card:hover{border-color:var(--nu);box-shadow:var(--sh-sm)}
+.card-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.card-icon{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.card-icon.purple{background:var(--nu-bg)}.card-icon.red{background:var(--red-bg)}.card-icon.green{background:var(--green-bg)}.card-icon.blue{background:var(--blue-bg)}.card-icon.amber{background:var(--amber-bg)}
+.card p{font-size:12.5px;color:var(--text-sec);line-height:1.65;margin-bottom:8px}
+.card p:last-child{margin-bottom:0}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:6px;font-size:10px;font-weight:600}
+.badge.ok{background:var(--green-bg);color:var(--green)}.badge.warn{background:var(--amber-bg);color:var(--amber)}.badge.info{background:var(--blue-bg);color:var(--blue)}
+.chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+.chip{padding:3px 9px;border-radius:7px;font-size:10px;font-weight:600}
+.chip.clear{background:var(--green-bg);color:var(--green)}.chip.reported{background:var(--red-bg);color:var(--red)}.chip.canceled{background:var(--amber-bg);color:var(--amber)}.chip.mixed{background:var(--blue-bg);color:var(--blue)}
 
-  .app-nav-btn {
-    width: 36px; height: 36px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    background: var(--bg);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    color: var(--text-secondary);
-    transition: all 0.2s;
-  }
+.note{padding:14px 18px;border-radius:10px;font-size:12.5px;color:var(--text-sec);line-height:1.65;margin-bottom:16px}
+.note.purple{background:var(--nu-bg);border-left:3px solid var(--nu)}
+.note.amber{background:var(--amber-bg);border-left:3px solid var(--amber)}
+.note strong{color:var(--text)}
 
-  .app-nav-btn:hover { background: var(--bg-page); color: var(--text); border-color: var(--nu); }
-  .app-nav-btn:disabled { opacity: 0.3; cursor: default; }
-  .app-nav-btn:disabled:hover { background: var(--bg); color: var(--text-secondary); border-color: var(--border); }
+.divider{height:1px;background:var(--border);margin:32px 0}
 
-  .slide-counter {
-    font-size: 13px;
-    color: var(--text-muted);
-    min-width: 60px;
-    text-align: center;
-    font-variant-numeric: tabular-nums;
-  }
-
-  /* Progress Bar */
-  .progress-bar {
-    position: fixed;
-    top: 56px; left: 0; right: 0;
-    height: 3px;
-    background: var(--border-light);
-    z-index: 199;
-  }
-
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--nu), var(--nu-light));
-    transition: width 0.4s ease;
-    border-radius: 0 2px 2px 0;
-  }
-
-  /* Slide Thumbnails Sidebar */
-  .thumb-sidebar {
-    position: fixed;
-    left: 0; top: 59px; bottom: 0;
-    width: 200px;
-    background: var(--bg);
-    border-right: 1px solid var(--border);
-    overflow-y: auto;
-    padding: 16px 12px;
-    z-index: 100;
-    transition: transform 0.3s;
-  }
-
-  .thumb-sidebar::-webkit-scrollbar { width: 4px; }
-  .thumb-sidebar::-webkit-scrollbar-track { background: transparent; }
-  .thumb-sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-
-  .thumb-item {
-    padding: 10px 12px;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-bottom: 4px;
-    transition: all 0.2s;
-    border: 2px solid transparent;
-  }
-
-  .thumb-item:hover { background: var(--bg-page); }
-
-  .thumb-item.active {
-    background: var(--nu-bg);
-    border-color: var(--nu);
-  }
-
-  .thumb-num {
-    font-size: 10px;
-    font-weight: 700;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  .thumb-item.active .thumb-num { color: var(--nu); }
-
-  .thumb-title {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text-secondary);
-    margin-top: 2px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .thumb-item.active .thumb-title { color: var(--text); }
-
-  .thumb-section {
-    font-size: 9px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--text-muted);
-    padding: 12px 12px 6px;
-    margin-top: 8px;
-  }
-
-  /* Main Slide Area */
-  .slide-viewport {
-    position: fixed;
-    left: 200px;
-    top: 59px;
-    right: 0;
-    bottom: 0;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--bg-page);
-    padding: 28px;
-  }
-
-  .slide {
-    width: 100%;
-    max-width: 1040px;
-    min-height: 560px;
-    max-height: calc(100vh - 120px);
-    background: var(--bg);
-    border-radius: 16px;
-    box-shadow: var(--shadow-lg);
-    padding: 48px 56px;
-    overflow-y: auto;
-    display: none;
-    animation: slideIn 0.35s ease;
-  }
-
-  .slide::-webkit-scrollbar { width: 6px; }
-  .slide::-webkit-scrollbar-track { background: transparent; }
-  .slide::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-
-  .slide.active { display: block; }
-
-  @keyframes slideIn {
-    from { opacity: 0; transform: translateY(16px) scale(0.99); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-  }
-
-  /* Slide Typography */
-  .slide-section-label {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--nu);
-    margin-bottom: 8px;
-  }
-
-  .slide h1 {
-    font-size: 32px;
-    font-weight: 800;
-    letter-spacing: -0.5px;
-    margin-bottom: 8px;
-    color: var(--text);
-  }
-
-  .slide h2 {
-    font-size: 22px;
-    font-weight: 700;
-    margin-bottom: 6px;
-    color: var(--text);
-  }
-
-  .slide h3 {
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: var(--text);
-  }
-
-  .slide-subtitle {
-    font-size: 15px;
-    color: var(--text-secondary);
-    margin-bottom: 32px;
-    line-height: 1.7;
-  }
-
-  /* Cover Slide */
-  .cover-slide {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: 480px;
-    position: relative;
-  }
-
-  .cover-slide .accent-bar {
-    width: 48px; height: 5px;
-    background: var(--nu);
-    border-radius: 3px;
-    margin-bottom: 24px;
-  }
-
-  .cover-slide h1 { font-size: 48px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.1; }
-  .cover-slide h1 span { color: var(--nu); }
-  .cover-slide .cover-date { font-size: 22px; color: var(--text-secondary); font-weight: 400; margin-top: 8px; }
-
-  .cover-meta {
-    display: flex;
-    gap: 24px;
-    margin-top: 40px;
-    padding-top: 24px;
-    border-top: 1px solid var(--border);
-  }
-
-  .cover-meta-item { font-size: 12px; color: var(--text-muted); }
-  .cover-meta-item strong { color: var(--text-secondary); font-weight: 600; display: block; margin-bottom: 2px; }
-
-  /* KPI Grid */
-  .kpi-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 16px;
-    margin-bottom: 28px;
-  }
-
-  .kpi {
-    padding: 20px;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    background: var(--bg);
-    transition: all 0.2s;
-  }
-
-  .kpi:hover { border-color: var(--nu); box-shadow: var(--shadow-sm); }
-  .kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 600; }
-  .kpi-val { font-size: 28px; font-weight: 800; margin-top: 4px; color: var(--text); }
-  .kpi-delta { font-size: 11px; margin-top: 4px; font-weight: 600; }
-  .kpi-delta.up { color: var(--green); }
-  .kpi-delta.down { color: var(--red); }
-  .kpi-delta.flat { color: var(--amber); }
-
-  /* Cards Grid */
-  .cards-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 20px;
-  }
-
-  .cards-grid.single { grid-template-columns: 1fr; }
-
-  .card {
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 24px;
-    transition: all 0.2s;
-    background: var(--bg);
-  }
-
-  .card:hover { border-color: var(--nu); box-shadow: var(--shadow-sm); }
-
-  .card-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
-  }
-
-  .card-icon {
-    width: 32px; height: 32px;
-    border-radius: 9px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 15px;
-    flex-shrink: 0;
-  }
-
-  .card-icon.purple { background: var(--nu-bg); }
-  .card-icon.red { background: var(--red-bg); }
-  .card-icon.green { background: var(--green-bg); }
-  .card-icon.blue { background: var(--blue-bg); }
-  .card-icon.amber { background: var(--amber-bg); }
-
-  .card p { font-size: 13px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 10px; }
-  .card p:last-child { margin-bottom: 0; }
-
-  /* Chips */
-  .chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
-  .chip {
-    padding: 4px 10px;
-    border-radius: 8px;
-    font-size: 11px;
-    font-weight: 600;
-  }
-  .chip.clear { background: var(--green-bg); color: var(--green); }
-  .chip.reported { background: var(--red-bg); color: var(--red); }
-  .chip.canceled { background: var(--amber-bg); color: var(--amber); }
-  .chip.mixed { background: var(--blue-bg); color: var(--blue); }
-
-  /* Tables */
-  .table-wrap {
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    margin-bottom: 20px;
-  }
-
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  table th {
-    text-align: left;
-    padding: 12px 16px;
-    background: var(--bg-page);
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: var(--text-muted);
-    border-bottom: 1px solid var(--border);
-  }
-  table td { padding: 11px 16px; border-bottom: 1px solid var(--border-light); color: var(--text-secondary); }
-  table tr:last-child td { border-bottom: none; }
-  table tr:hover td { background: #FAFAFE; }
-  table td:first-child { font-weight: 600; color: var(--text); }
-  table .total td { font-weight: 700; color: var(--text); background: var(--nu-bg); }
-
-  /* Badge */
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 3px 10px;
-    border-radius: 6px;
-    font-size: 11px;
-    font-weight: 600;
-  }
-  .badge.ok { background: var(--green-bg); color: var(--green); }
-  .badge.warn { background: var(--amber-bg); color: var(--amber); }
-  .badge.info { background: var(--blue-bg); color: var(--blue); }
-
-  /* Chart Area */
-  .chart-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 20px;
-  }
-
-  .chart-grid.full { grid-template-columns: 1fr; }
-
-  .chart-box {
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px 24px;
-    background: var(--bg);
-  }
-
-  .chart-box h3 { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 12px; }
-
-  /* Info Note */
-  .note {
-    padding: 14px 18px;
-    border-radius: 10px;
-    font-size: 13px;
-    color: var(--text-secondary);
-    line-height: 1.7;
-    margin-bottom: 20px;
-  }
-  .note.purple { background: var(--nu-bg); border-left: 3px solid var(--nu); }
-  .note.amber { background: var(--amber-bg); border-left: 3px solid var(--amber); }
-  .note.red { background: var(--red-bg); border-left: 3px solid var(--red); }
-  .note strong { color: var(--text); }
-
-  /* Keyboard hint */
-  .kb-hint {
-    position: fixed;
-    bottom: 16px;
-    right: 24px;
-    font-size: 11px;
-    color: var(--text-muted);
-    background: var(--bg);
-    padding: 6px 12px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    z-index: 50;
-  }
-  .kb-hint kbd {
-    background: var(--bg-page);
-    padding: 1px 6px;
-    border-radius: 4px;
-    border: 1px solid var(--border);
-    font-family: inherit;
-    font-size: 11px;
-  }
-
-  /* Mobile */
-  .mobile-bar { display: none; }
-  @media (max-width: 900px) {
-    .thumb-sidebar { display: none; }
-    .slide-viewport { left: 0; padding: 16px; }
-    .slide { padding: 28px 24px; border-radius: 12px; }
-    .cover-slide h1 { font-size: 32px; }
-    .chart-grid, .cards-grid { grid-template-columns: 1fr; }
-    .kpi-row { grid-template-columns: 1fr 1fr; }
-    .mobile-bar { display: flex; }
-    .kb-hint { display: none; }
-  }
+@media(max-width:900px){
+  .sidebar{display:none}
+  .main{margin-left:0;padding:20px 16px}
+  .chart-row,.cards-grid{grid-template-columns:1fr}
+  .kpi-row{grid-template-columns:1fr 1fr}
+}
 </style>
 </head>
 <body>
 
-<!-- App Bar -->
-<header class="app-bar">
-  <div class="app-logo">
-    <div class="app-logo-icon">M</div>
-    MLRO Report
-  </div>
-  <div class="app-title">Monthly Report — March 2026</div>
-  <div class="app-nav">
-    <button class="app-nav-btn" onclick="goSlide(current-1)" id="prevBtn">←</button>
-    <span class="slide-counter" id="counter">1 / 14</span>
-    <button class="app-nav-btn" onclick="goSlide(current+1)" id="nextBtn">→</button>
+<header class="header">
+  <div class="header-logo"><div class="header-logo-icon">M</div>MLRO Dashboard</div>
+  <div class="header-period">
+    <span>Reporting Window</span>
+    <span class="header-badge">Jul/2025 — Mar/2026</span>
+    <span>Current Month</span>
+    <select id="monthSelect" onchange="highlightMonth(this.value)">
+      <option value="8" selected>Mar/26</option>
+      <option value="7">Feb/26</option>
+      <option value="6">Jan/26</option>
+      <option value="5">Dec/25</option>
+      <option value="4">Nov/25</option>
+      <option value="3">Oct/25</option>
+      <option value="2">Sep/25</option>
+      <option value="1">Aug/25</option>
+      <option value="0">Jul/25</option>
+    </select>
   </div>
 </header>
 
-<div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+<nav class="sidebar">
+  <div class="nav-section">Dashboard</div>
+  <div class="nav-item active" data-target="overview"><div class="nav-icon">📊</div>Executive Overview</div>
 
-<!-- Thumbnail Sidebar -->
-<aside class="thumb-sidebar" id="thumbs">
-  <div class="thumb-section">Overview</div>
-  <div class="thumb-item active" data-slide="0"><div class="thumb-num">01</div><div class="thumb-title">Cover</div></div>
+  <div class="nav-section">Customers</div>
+  <div class="nav-item" data-target="pep"><div class="nav-icon">🏛️</div>PEP Analysis</div>
+  <div class="nav-item" data-target="pep-hl"><div class="nav-icon">⭐</div>PEP High Level</div>
 
-  <div class="thumb-section">Highlights</div>
-  <div class="thumb-item" data-slide="1"><div class="thumb-num">02</div><div class="thumb-title">Monthly Highlights</div></div>
-  <div class="thumb-item" data-slide="2"><div class="thumb-num">03</div><div class="thumb-title">March Operations</div></div>
-  <div class="thumb-item" data-slide="3"><div class="thumb-num">04</div><div class="thumb-title">Process & COAF</div></div>
+  <div class="nav-section">MSAC Indicators</div>
+  <div class="nav-item" data-target="sanctions"><div class="nav-icon">🚫</div>Sanctions</div>
+  <div class="nav-item" data-target="nubankers"><div class="nav-icon">👥</div>Nubanker Reports</div>
 
-  <div class="thumb-section">Customers</div>
-  <div class="thumb-item" data-slide="4"><div class="thumb-num">05</div><div class="thumb-title">EDD PF / PJ</div></div>
-  <div class="thumb-item" data-slide="5"><div class="thumb-num">06</div><div class="thumb-title">PEP Analysis</div></div>
-  <div class="thumb-item" data-slide="6"><div class="thumb-num">07</div><div class="thumb-title">PEP Positions</div></div>
+  <div class="nav-section">MLRO Process</div>
+  <div class="nav-item" data-target="deliberations"><div class="nav-icon">⚖️</div>Deliberations</div>
+  <div class="nav-item" data-target="qa"><div class="nav-icon">✅</div>QA COAF</div>
 
-  <div class="thumb-section">MSAC Indicators</div>
-  <div class="thumb-item" data-slide="7"><div class="thumb-num">08</div><div class="thumb-title">Alerts Effectiveness</div></div>
-  <div class="thumb-item" data-slide="8"><div class="thumb-num">09</div><div class="thumb-title">SPA & Breaches</div></div>
-  <div class="thumb-item" data-slide="9"><div class="thumb-num">10</div><div class="thumb-title">Sanctions</div></div>
+  <div class="nav-section">Highlights</div>
+  <div class="nav-item" data-target="operations"><div class="nav-icon">🔴</div>Operations</div>
+  <div class="nav-item" data-target="process"><div class="nav-icon">🔄</div>Process & Rules</div>
+</nav>
 
-  <div class="thumb-section">MLRO Process</div>
-  <div class="thumb-item" data-slide="10"><div class="thumb-num">11</div><div class="thumb-title">Deliberations</div></div>
-  <div class="thumb-item" data-slide="11"><div class="thumb-num">12</div><div class="thumb-title">QA COAF</div></div>
-  <div class="thumb-item" data-slide="12"><div class="thumb-num">13</div><div class="thumb-title">Nubanker Reports</div></div>
-  <div class="thumb-item" data-slide="13"><div class="thumb-num">14</div><div class="thumb-title">Governance</div></div>
-</aside>
+<div class="main">
 
-<!-- Slide Viewport -->
-<div class="slide-viewport">
+  <!-- ══════ EXECUTIVE OVERVIEW ══════ -->
+  <div class="section" id="overview">
+    <div class="section-label">Executive Overview</div>
+    <h2>MLRO Monthly Dashboard</h2>
+    <p class="section-sub">9-month trend analysis — Jul/2025 to Mar/2026. Data sourced from Databricks, Google Sheets, and Jira.</p>
 
-  <!-- 0: Cover -->
-  <div class="slide active" data-idx="0">
-    <div class="cover-slide">
-      <div class="accent-bar"></div>
-      <h1>MLRO <span>Report</span></h1>
-      <div class="cover-date">March, 2026</div>
-      <div class="cover-meta">
-        <div class="cover-meta-item"><strong>Prepared by</strong>Roger Miura — MLRO</div>
-        <div class="cover-meta-item"><strong>Audience</strong>Board of Directors</div>
-        <div class="cover-meta-item"><strong>Classification</strong>AML/CFT Monthly Report</div>
-        <div class="cover-meta-item"><strong>Period</strong>Jul/2025 — Mar/2026</div>
+    <div class="kpi-row" id="kpiRow">
+      <div class="kpi"><div class="kpi-label">Total PEPs</div><div class="kpi-val" id="kv-pep">5,396</div><div class="kpi-delta up" id="kd-pep">↑ +3.6% vs Feb</div></div>
+      <div class="kpi"><div class="kpi-label">PEP Rejected</div><div class="kpi-val" id="kv-rej">72</div><div class="kpi-delta down" id="kd-rej">↓ -27.3% vs Feb</div></div>
+      <div class="kpi"><div class="kpi-label">High Level PEPs</div><div class="kpi-val" id="kv-hl">175</div><div class="kpi-delta down" id="kd-hl">↓ -4.9% vs Feb</div></div>
+      <div class="kpi"><div class="kpi-label">Sanction Alerts</div><div class="kpi-val" id="kv-san">259</div><div class="kpi-delta up" id="kd-san">↑ vs 56 Feb</div></div>
+      <div class="kpi"><div class="kpi-label">Nubanker Reports</div><div class="kpi-val" id="kv-nub">115</div><div class="kpi-delta up" id="kd-nub">↑ +1.8% vs Feb</div></div>
+      <div class="kpi"><div class="kpi-label">MLRO Alerts</div><div class="kpi-val" id="kv-mlro">51</div><div class="kpi-delta down" id="kd-mlro">↓ -32% vs Feb</div></div>
+    </div>
+
+    <div class="chart-row">
+      <div class="chart-box"><h3>Total PEPs — Trend <span class="tag">9 months</span></h3><canvas id="overviewPepChart"></canvas></div>
+      <div class="chart-box"><h3>Nubanker Reports — Trend <span class="tag">9 months</span></h3><canvas id="overviewNubChart"></canvas></div>
+    </div>
+    <div class="chart-row">
+      <div class="chart-box"><h3>Sanctions Alerts — Trend <span class="tag">9 months</span></h3><canvas id="overviewSanChart"></canvas></div>
+      <div class="chart-box"><h3>PEP Rejected — Trend <span class="tag">9 months</span></h3><canvas id="overviewRejChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ══════ PEP ANALYSIS ══════ -->
+  <div class="section" id="pep">
+    <div class="section-label">Customer Indicators</div>
+    <h2>Politically Exposed Persons</h2>
+    <p class="section-sub">PEP identification via onboarding screening and ongoing monitoring across the full reporting window.</p>
+
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">Onboarding</div><div class="kpi-val">2,997</div><div class="kpi-delta up">↑ +13% vs Feb</div></div>
+      <div class="kpi"><div class="kpi-label">Ongoing</div><div class="kpi-val">2,399</div><div class="kpi-delta down">↓ -6.1% vs Feb</div></div>
+      <div class="kpi"><div class="kpi-label">Total</div><div class="kpi-val">5,396</div><div class="kpi-delta up">↑ +3.6% vs Feb</div></div>
+      <div class="kpi"><div class="kpi-label">9M Average</div><div class="kpi-val">6,032</div><div class="kpi-delta flat">Baseline</div></div>
+    </div>
+
+    <div class="chart-row">
+      <div class="chart-box"><h3>PEP Onboarding vs Ongoing <span class="tag">Monthly</span></h3><canvas id="pepBarChart"></canvas></div>
+      <div class="chart-box"><h3>Total PEP — Cumulative Trend</h3><canvas id="pepLineChart"></canvas></div>
+    </div>
+
+    <div class="chart-row full">
+      <div class="chart-box"><h3>Rejected PEPs — Onboarding vs Ongoing</h3><canvas id="pepRejChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ══════ PEP HIGH LEVEL ══════ -->
+  <div class="section" id="pep-hl">
+    <div class="section-label">Customer Indicators</div>
+    <h2>PEP High Level — Positions</h2>
+    <p class="section-sub">Senior political figures identified across titular and related categories, with monthly trend.</p>
+
+    <div class="chart-row">
+      <div class="chart-box"><h3>High Level PEP — Total Trend</h3><canvas id="hlTrendChart"></canvas></div>
+      <div class="chart-box"><h3>Breakdown — Related vs Titular</h3><canvas id="hlBreakChart"></canvas></div>
+    </div>
+
+    <div class="chart-row">
+      <div class="chart-box"><h3>Mar/26 — Positions Detail</h3><canvas id="hlPosChart"></canvas></div>
+      <div class="chart-box">
+        <h3>Mar/26 — Positions Table</h3>
+        <div class="table-wrap" style="border:none;margin:0">
+          <table>
+            <thead><tr><th>Position</th><th>Tit. Onb</th><th>Tit. Ong</th><th>Rel. Onb</th><th>Rel. Ong</th><th>Total</th></tr></thead>
+            <tbody>
+              <tr><td>Senador</td><td>1</td><td>—</td><td>10</td><td>6</td><td><strong>17</strong></td></tr>
+              <tr><td>Governor</td><td>—</td><td>—</td><td>3</td><td>3</td><td><strong>6</strong></td></tr>
+              <tr><td>Vice Governor</td><td>—</td><td>1</td><td>1</td><td>2</td><td><strong>4</strong></td></tr>
+              <tr><td>President</td><td>—</td><td>—</td><td>2</td><td>—</td><td><strong>2</strong></td></tr>
+              <tr><td>Vice President</td><td>—</td><td>—</td><td>1</td><td>1</td><td><strong>2</strong></td></tr>
+              <tr class="total"><td>Total</td><td>1</td><td>1</td><td>17</td><td>12</td><td><strong>31</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- 1: Highlights Summary -->
-  <div class="slide" data-idx="1">
-    <div class="slide-section-label">Section 1 — Highlights</div>
-    <h2>Monthly Highlights</h2>
-    <p class="slide-subtitle">Featuring critical events, emerging trends, relevant regulatory updates, and continuous improvement initiatives.</p>
+  <div class="divider"></div>
+
+  <!-- ══════ SANCTIONS ══════ -->
+  <div class="section" id="sanctions">
+    <div class="section-label">MSAC Indicators</div>
+    <h2>Sanctions</h2>
+    <p class="section-sub">Sanction screening alerts and confirmed true matches for both onboarding and ongoing monitoring.</p>
+
     <div class="kpi-row">
-      <div class="kpi"><div class="kpi-label">Total PEPs</div><div class="kpi-val">5,396</div><div class="kpi-delta flat">Onb: 2,997 · Ong: 2,399</div></div>
-      <div class="kpi"><div class="kpi-label">Nubanker Reports</div><div class="kpi-val">115</div><div class="kpi-delta up">↑ +1.8% vs Feb</div></div>
-      <div class="kpi"><div class="kpi-label">MLRO Alerts</div><div class="kpi-val">51</div><div class="kpi-delta down">↓ -32% vs Feb</div></div>
-      <div class="kpi"><div class="kpi-label">Deliberations</div><div class="kpi-val">1</div><div class="kpi-delta down">↓ vs 2 in Feb</div></div>
-      <div class="kpi"><div class="kpi-label">High Level PEPs</div><div class="kpi-val">175</div><div class="kpi-delta down">↓ -4.9% vs Feb</div></div>
+      <div class="kpi"><div class="kpi-label">Alerts Onboarding</div><div class="kpi-val">140</div><div class="kpi-delta up">↑ vs 51 Feb</div></div>
+      <div class="kpi"><div class="kpi-label">Alerts Ongoing</div><div class="kpi-val">119</div><div class="kpi-delta up">↑ vs 5 Feb</div></div>
+      <div class="kpi"><div class="kpi-label">True Match Onb</div><div class="kpi-val">2</div><div class="kpi-delta flat">= Feb</div></div>
+      <div class="kpi"><div class="kpi-label">True Match Ong</div><div class="kpi-val">0</div><div class="kpi-delta flat">= Feb</div></div>
     </div>
-    <div class="note purple">
-      <strong>Key events this month:</strong> Operação Compliance Zero (Banco Master/BRB — billion-dollar fraud, in progress). Operação Núcleo Político CV no Amazonas (8 analyzed, 2 reported). INSS × Agibank investigation concluded as inconclusive. 1,191 divergent-period cases resolved (ABR approved, 2 COAF rectifications). Cancellation process U18 RFC approved. Visit to COAF headquarters with new <code>riscoaltocoaf</code> tag adopted.
+
+    <div class="chart-row full">
+      <div class="chart-box"><h3>Sanctions Alerts & True Matches <span class="tag">9 months</span></h3><canvas id="sanctionsFullChart"></canvas></div>
+    </div>
+    <div class="note amber"><strong>Dec/25 spike:</strong> Sanctions list update caused 1,358 onboarding + 3,163 ongoing alerts. This was a one-time bulk screening event.</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ══════ NUBANKER REPORTS ══════ -->
+  <div class="section" id="nubankers">
+    <div class="section-label">MSAC Indicators</div>
+    <h2>Reports by Nubankers / MLRO</h2>
+    <p class="section-sub">Internal reports of suspicious activities submitted by various teams, with 9-month trend by source.</p>
+
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">Total Reports</div><div class="kpi-val">115</div><div class="kpi-delta up">↑ +1.8% vs Feb</div></div>
+      <div class="kpi"><div class="kpi-label">AML Gov / MLRO</div><div class="kpi-val">51</div><div class="kpi-delta down">↓ vs 75</div></div>
+      <div class="kpi"><div class="kpi-label">Google Forms</div><div class="kpi-val">26</div><div class="kpi-delta up">↑ vs 17</div></div>
+      <div class="kpi"><div class="kpi-label">Conta Global</div><div class="kpi-val">23</div><div class="kpi-delta up">↑ vs 13</div></div>
+      <div class="kpi"><div class="kpi-label">9M Average</div><div class="kpi-val">129</div><div class="kpi-delta flat">Baseline</div></div>
+    </div>
+
+    <div class="chart-row">
+      <div class="chart-box"><h3>Total Reports — Trend <span class="tag">9 months</span></h3><canvas id="nubTrendChart"></canvas></div>
+      <div class="chart-box"><h3>Reports by Source — Stacked <span class="tag">9 months</span></h3><canvas id="nubStackChart"></canvas></div>
+    </div>
+    <div class="note purple"><strong>Trend note:</strong> AML Gov/MLRO cases peaked at 160 in Sep/25. With the new media-handling process, MLRO opens macro tasks via OPS forms instead of individual cases — hence the declining MLRO direct reports.</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ══════ DELIBERATIONS ══════ -->
+  <div class="section" id="deliberations">
+    <div class="section-label">MLRO Process</div>
+    <h2>MLRO Deliberations & Forums</h2>
+    <p class="section-sub">Cases escalated to MLRO and recurring forum deliberations — 5-month window.</p>
+
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">Total Deliberations</div><div class="kpi-val">1</div><div class="kpi-delta down">↓ vs 2 Feb</div></div>
+      <div class="kpi"><div class="kpi-label">MLRO Alerts</div><div class="kpi-val">51</div><div class="kpi-delta down">↓ -32% vs Feb</div></div>
+    </div>
+
+    <div class="chart-row">
+      <div class="chart-box"><h3>Alerts Created by MLRO <span class="tag">5 months</span></h3><canvas id="mlroAlertChart"></canvas></div>
+      <div class="chart-box"><h3>Deliberations by Forum</h3><canvas id="forumsChart"></canvas></div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Forum</th><th>Nov/25</th><th>Dec/25</th><th>Jan/26</th><th>Feb/26</th><th>Mar/26</th></tr></thead>
+        <tbody>
+          <tr><td>AML Exit Mgmt Forum</td><td>—</td><td>0</td><td>2</td><td>0</td><td>0</td></tr>
+          <tr><td>Reputational Risk Commission</td><td>—</td><td>2</td><td>2</td><td>1</td><td>1</td></tr>
+          <tr><td>Sanctions</td><td>—</td><td>2</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>KYC — PEP/Media</td><td>—</td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+          <tr class="total"><td>Total</td><td>—</td><td>5</td><td>5</td><td>2</td><td>1</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
-  <!-- 2: Operations (NEW — from Jira Board MLRO March 2026) -->
-  <div class="slide" data-idx="2">
-    <div class="slide-section-label">Highlights — March 2026</div>
+  <div class="divider"></div>
+
+  <!-- ══════ QA COAF ══════ -->
+  <div class="section" id="qa">
+    <div class="section-label">MLRO Process</div>
+    <h2>COAF Report Quality Assurance</h2>
+    <p class="section-sub">Quality evaluation of reports sent to COAF — PlayVox scorecards.</p>
+
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">QA OPS Team</div><div class="kpi-val" style="color:var(--green)">91.99%</div><div class="kpi-delta up">Above threshold</div></div>
+      <div class="kpi"><div class="kpi-label">QA MLRO Perspective</div><div class="kpi-val" style="color:var(--amber)">80%</div><div class="kpi-delta flat">Satisfactory</div></div>
+      <div class="kpi"><div class="kpi-label">Cases Analyzed</div><div class="kpi-val">249</div><div class="kpi-delta flat">First week only</div></div>
+    </div>
+    <div class="note purple">In January 2026, only <strong>249 cases</strong> were analyzed (first week). This is due to the increase in AML alerts and the EDD PJ task force. The <strong>Looker dashboard was replaced by QuickSight</strong>.</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ══════ OPERATIONS ══════ -->
+  <div class="section" id="operations">
+    <div class="section-label">Highlights — March 2026</div>
     <h2>Relevant Operations targeted by MLRO</h2>
-    <p class="slide-subtitle">New operations and investigations processed in March 2026, sourced from the MLRO Jira Board.</p>
+    <p class="section-sub">Key operations and investigations processed in March 2026, sourced from the MLRO Jira Board.</p>
+
     <div class="cards-grid">
-      <div class="card" style="border-left:3px solid var(--red);">
+      <div class="card" style="border-left:3px solid var(--red)">
         <div class="card-header"><div class="card-icon red">🔴</div><h3>Operação Compliance Zero — Banco Master / BRB</h3><span class="badge warn">In Progress</span></div>
-        <p>Federal Police investigation (originally launched Nov/2025) into a <strong>billion-dollar fraud scheme</strong> involving Banco Master and Banco de Brasília (BRB). Document received from Legal team with list of individuals to evaluate.</p>
-        <p>MLRO is evaluating the PDF for additional accounts, researching people and companies cited in media, and assessing related entities.</p>
+        <p>Federal Police investigation into a <strong>billion-dollar fraud scheme</strong> involving Banco Master and BRB. MLRO evaluating PDF for additional accounts, researching cited entities.</p>
         <div class="chips"><span class="chip mixed">MLRO-206</span><span class="chip reported">Source: Legal</span></div>
       </div>
-      <div class="card" style="border-left:3px solid var(--red);">
+      <div class="card" style="border-left:3px solid var(--red)">
         <div class="card-header"><div class="card-icon red">🔴</div><h3>Operação Núcleo Político CV no Amazonas</h3><span class="badge ok">Done</span></div>
-        <p>Investigation into a scheme structured by the <strong>Comando Vermelho (CV)</strong> in collaboration with public officials, operating to bring drugs from Colombia and distribute from Amazonas. 8 individuals arrested including court officials, legislative staff, and police officers.</p>
-        <p>High cancellation rate of clients without transactions. Two with judicial blocks were reported to COAF.</p>
-        <div class="chips"><span class="chip clear">Clear: 2</span><span class="chip reported">Reported & Canceled: 2</span><span class="chip canceled">Canceled: 3</span><span class="chip mixed">No account: 1</span></div>
+        <p><strong>Comando Vermelho</strong> scheme with public officials — 8 individuals analyzed. Two with judicial blocks reported to COAF.</p>
+        <div class="chips"><span class="chip clear">Clear: 2</span><span class="chip reported">Reported: 2</span><span class="chip canceled">Canceled: 3</span><span class="chip mixed">No account: 1</span></div>
       </div>
-      <div class="card" style="border-left:3px solid var(--amber);">
+      <div class="card" style="border-left:3px solid var(--amber)">
         <div class="card-header"><div class="card-icon amber">🟠</div><h3>Levantamento INSS × Agibank</h3><span class="badge ok">Done</span></div>
-        <p>Investigation into INSS suspension of Agibank consigned credit operations due to <strong>serious irregularities</strong>. Nubank clients receiving values from Agibank accounts were analyzed (credits, debits, account status, last report).</p>
-        <p><strong>Conclusion (23/Mar):</strong> Inconclusive study — demand finalized. Suspicious cases will be flagged through existing Prev. Fraudes and PLD/FTP rules.</p>
+        <p>Investigation of INSS suspension of Agibank consigned credit. <strong>Conclusion (23/Mar):</strong> Inconclusive — demand finalized.</p>
         <div class="chips"><span class="chip mixed">MLRO-154</span><span class="chip canceled">Inconclusive</span></div>
       </div>
-      <div class="card" style="border-left:3px solid var(--blue);">
+      <div class="card" style="border-left:3px solid var(--blue)">
         <div class="card-header"><div class="card-icon blue">📊</div><h3>Casos Reportados com Período Divergente</h3><span class="badge ok">Done</span></div>
-        <p>Due to an Analytics issue, ~1,000 alerts were generated and reported with wrong period (Dec+ instead of Nov+). ABR analysis using <strong>Glean</strong> compared summaries:</p>
-        <p style="font-size:12px;">• <strong>1,191</strong> total cases • <strong>269</strong> with volume >2x • <strong>226</strong> with new risk counterparty • <strong>7</strong> with risk counterparty ≥20% • <strong>2 cases</strong> requiring rectification to COAF</p>
-        <p>ABR approved by Fabricio. Remaining cases receive mitigation note in Holmes timeline.</p>
+        <p><strong>1,191</strong> cases with wrong period. ABR analysis: 269 volume >2x, 226 new risk counterparty, <strong>2 rectifications to COAF</strong>.</p>
         <div class="chips"><span class="chip mixed">MLRO-204</span><span class="chip clear">2 rectifications</span></div>
       </div>
     </div>
   </div>
 
-  <!-- 3: Rules + COAF + Process -->
-  <div class="slide" data-idx="3">
-    <div class="slide-section-label">Highlights — March 2026</div>
+  <div class="divider"></div>
+
+  <!-- ══════ PROCESS ══════ -->
+  <div class="section" id="process">
+    <div class="section-label">Highlights — March 2026</div>
     <h2>Process Improvements, Rules & COAF</h2>
-    <p class="slide-subtitle">Key process reviews, effectiveness report finalization, and COAF cooperation updates.</p>
+    <p class="section-sub">Key process reviews, effectiveness report finalization, and COAF cooperation updates.</p>
+
     <div class="cards-grid">
       <div class="card">
         <div class="card-header"><div class="card-icon blue">🔄</div><h3>Cancellation Process Review</h3><span class="badge warn">In Progress</span></div>
-        <p>Improvement of account cancellation process — reactive flow (reactivate accounts via M-Team/Ombudsman requests) and proactive flow (review cancellation matrix for high financial capacity PJs without high-risk counterparties).</p>
-        <p style="font-size:12px;"><strong>U18 RFC approved</strong> (MLRO-203): Unified analyst saves time (12:08 min), MLRO focuses on exceptions only. Meeting scheduled 13/Mar with OPS team for full process evaluation.</p>
+        <p>Reactive (reactivate via M-Team/Ombudsman) and proactive (review matrix for high-capacity PJs) flows under revision.</p>
+        <p style="font-size:11px"><strong>U18 RFC approved</strong> (MLRO-203): Unified analyst saves 12:08 min. MLRO focuses on exceptions.</p>
       </div>
       <div class="card">
         <div class="card-header"><div class="card-icon purple">📋</div><h3>Effectiveness Report</h3></div>
-        <p>In Feb 2026, MLRO finalized rules and studies for the action plan submitted June 30, 2025.</p>
-        <div style="margin-top:10px;font-size:12px;">
-          <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border-light)"><span>Cash Withdrawal</span><span class="badge ok">✓ Adjusted</span></div>
-          <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border-light)"><span>Border Withdrawal</span><span class="badge ok">✓ Adjusted</span></div>
-          <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border-light)"><span>Bank Slip Deposits</span><span class="badge ok">✓ Adjusted</span></div>
-          <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border-light)"><span>FTP Messages</span><span class="badge ok">✓ Adjusted</span></div>
-          <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border-light)"><span>Bank Slip Payments</span><span class="badge warn">✗ Refuted</span></div>
-          <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border-light)"><span>PJ Transaction Volume</span><span class="badge warn">✗ Refuted</span></div>
-          <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border-light)"><span>High Credit Card Balances</span><span class="badge warn">✗ Refuted</span></div>
-          <div style="display:flex;justify-content:space-between;padding:6px 0"><span>Purchase/Payment Cycles</span><span class="badge warn">✗ Refuted</span></div>
+        <p>Rules and studies for action plan (Jun 30, 2025) finalized in Feb 2026.</p>
+        <div style="margin-top:8px;font-size:11.5px">
+          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border-light)"><span>Cash Withdrawal</span><span class="badge ok">✓</span></div>
+          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border-light)"><span>Border Withdrawal</span><span class="badge ok">✓</span></div>
+          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border-light)"><span>Bank Slip Deposits</span><span class="badge ok">✓</span></div>
+          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border-light)"><span>FTP Messages</span><span class="badge ok">✓</span></div>
+          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border-light)"><span>Bank Slip Payments</span><span class="badge warn">✗</span></div>
+          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border-light)"><span>PJ Transaction Volume</span><span class="badge warn">✗</span></div>
+          <div style="display:flex;justify-content:space-between;padding:5px 0"><span>High Credit Card Balances</span><span class="badge warn">✗</span></div>
         </div>
       </div>
       <div class="card">
         <div class="card-header"><div class="card-icon green">🏛️</div><h3>Visit to COAF — 23 Feb 2026</h3></div>
-        <p>Presented governance structure, AML processes, and strategic projects. Strengthened institutional relationship with COAF's new team.</p>
-        <p><strong>Outcome:</strong> Expanded institutional credibility, created fronts for technical collaboration, positioned Nubank as active partner in the AML ecosystem.</p>
-        <div style="margin-top:12px;padding:12px 14px;background:var(--nu-bg);border-radius:8px;font-size:12px;">
-          <strong style="color:var(--nu);">New Tag:</strong> <code style="background:white;padding:2px 8px;border-radius:4px;font-size:11px;">riscoaltocoaf</code><br>
-          <span style="color:var(--text-secondary)">Applied to high-risk approved reports. Alignment with COAF Director completed.</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 4: EDD -->
-  <div class="slide" data-idx="4">
-    <div class="slide-section-label">Section 2 — Customer Indicators</div>
-    <h2>Enhanced Due Diligence — PF / PJ</h2>
-    <p class="slide-subtitle">Performance and risk indicators reflecting the effectiveness of monitoring and analysis processes.</p>
-    <div class="cards-grid">
-      <div class="card">
-        <div class="card-header"><div class="card-icon blue">👤</div><h3>EDD PF — Pessoa Física</h3></div>
-        <p>The team responsible for the old dashboard <strong>discontinued the tool</strong> and existing graphs. OPS has been asked to build a new graph showing what is coming into the EDD/CDD queues.</p>
-        <p><span class="badge info">Under construction</span></p>
-      </div>
-      <div class="card">
-        <div class="card-header"><div class="card-icon amber">🏢</div><h3>EDD PJ — Pessoa Jurídica</h3></div>
-        <p>Following BCB observation regarding Ongoing EDD PJ, the volume of <strong>high and medium-risk</strong> legal entity cases was added to the queue. This increase impacted other queues, including report quality (Slide 19).</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- 5: PEP -->
-  <div class="slide" data-idx="5">
-    <div class="slide-section-label">Customer Indicators</div>
-    <h2>Politically Exposed Persons</h2>
-    <p class="slide-subtitle">PEP identification through onboarding and ongoing monitoring.</p>
-    <div class="kpi-row">
-      <div class="kpi"><div class="kpi-label">PEP Onboarding</div><div class="kpi-val">2,997</div><div class="kpi-delta up">↑ +13% vs Feb</div></div>
-      <div class="kpi"><div class="kpi-label">PEP Ongoing</div><div class="kpi-val">2,399</div><div class="kpi-delta down">↓ -6.1% vs Feb</div></div>
-      <div class="kpi"><div class="kpi-label">Rejected Onb</div><div class="kpi-val">69</div><div class="kpi-delta down">↓ vs 96</div></div>
-      <div class="kpi"><div class="kpi-label">Rejected Ong</div><div class="kpi-val">3</div><div class="kpi-delta flat">= Feb</div></div>
-    </div>
-    <div class="chart-grid">
-      <div class="chart-box"><h3>Total PEPs — Onboarding vs Ongoing</h3><canvas id="pepChart"></canvas></div>
-      <div class="chart-box"><h3>High Level PEP — Related vs Titular</h3><canvas id="hlChart"></canvas></div>
-    </div>
-  </div>
-
-  <!-- 6: PEP Positions -->
-  <div class="slide" data-idx="6">
-    <div class="slide-section-label">Customer Indicators</div>
-    <h2>PEP High Level Positions — March 2026</h2>
-    <p class="slide-subtitle">Breakdown by political position: Titular and Related, Onboarding and Ongoing.</p>
-    <div class="chart-grid">
-      <div class="chart-box"><h3>Positions Breakdown</h3><canvas id="posChart"></canvas></div>
-      <div class="chart-box"><h3>PEP Rejected — Trend</h3><canvas id="rejChart"></canvas></div>
-    </div>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Position</th><th>Titular Onb</th><th>Titular Ong</th><th>Related Onb</th><th>Related Ong</th><th>Total</th></tr></thead>
-        <tbody>
-          <tr><td>Senador</td><td>1</td><td>—</td><td>10</td><td>6</td><td><strong>17</strong></td></tr>
-          <tr><td>Governor</td><td>—</td><td>—</td><td>3</td><td>3</td><td><strong>6</strong></td></tr>
-          <tr><td>Vice President</td><td>—</td><td>—</td><td>1</td><td>1</td><td><strong>2</strong></td></tr>
-          <tr><td>Vice Governor</td><td>—</td><td>1</td><td>1</td><td>2</td><td><strong>4</strong></td></tr>
-          <tr><td>President</td><td>—</td><td>—</td><td>2</td><td>—</td><td><strong>2</strong></td></tr>
-          <tr class="total"><td>Total</td><td>1</td><td>1</td><td>17</td><td>12</td><td><strong>31</strong></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- 7: Alerts Effectiveness -->
-  <div class="slide" data-idx="7">
-    <div class="slide-section-label">Section 3 — MSAC Indicators</div>
-    <h2>Effectiveness of Alerts</h2>
-    <p class="slide-subtitle">Analysis of alert effectiveness across NuPag, NuInvest, and NuCrypto products.</p>
-    <div class="cards-grid">
-      <div class="card">
-        <div class="card-header"><div class="card-icon purple">💳</div><h3>NuPag</h3></div>
-        <p>Analytical review of cases reported to COAF in progress. Strategy: focus on cases with clear jurisprudence, no alerts in past 12 months, single rule triggered, no risk factors.</p>
-        <p><span class="badge info">Due Date: Dec 2025</span></p>
-      </div>
-      <div class="card">
-        <div class="card-header"><div class="card-icon blue">📈</div><h3>NuInvest</h3></div>
-        <p>Standard monitoring of alerts — same structure as NuPag. Charts available in QuickSight dashboard.</p>
-      </div>
-      <div class="card">
-        <div class="card-header"><div class="card-icon amber">🪙</div><h3>NuCrypto</h3></div>
-        <p>Many portfolio reclassifications caused 2024 transactions to be automatically reviewed, generating more alerts in Jan/2026. Change in SCAM risk from <strong>moderate to severe</strong> also contributed.</p>
-      </div>
-      <div class="card">
-        <div class="card-header"><div class="card-icon green">📄</div><h3>SPA Reports</h3></div>
-        <p><strong>PJ:</strong> Tends to decrease — clients with no risk appetite. <strong>PF:</strong> Tends to increase — refinement of illegal bets transfer rules. Ref: Ordinance 566 — Art. 4º & 5º.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- 8: SPA + Breaches -->
-  <div class="slide" data-idx="8">
-    <div class="slide-section-label">MSAC Indicators</div>
-    <h2>Report Breaches — 24 Hours</h2>
-    <p class="slide-subtitle">Cases of delayed COAF reports identified following TOE45 control execution.</p>
-    <div class="cards-grid single">
-      <div class="card" style="border-left:3px solid var(--red);">
-        <div class="card-header"><div class="card-icon red">⚠️</div><h3>Breach 1 — December 19, 2025</h3></div>
-        <p>Failure in the service responsible for sending a message 40 minutes after the decision. Detected only on December 23 — resulted in <strong>regulatory delay</strong>.</p>
-      </div>
-    </div>
-    <div class="cards-grid single">
-      <div class="card" style="border-left:3px solid var(--red);">
-        <div class="card-header"><div class="card-icon red">⚠️</div><h3>Breach 2 — January 12, 2026</h3></div>
-        <p>Failure to generate XML archive — unrecognized term prevented transformation of Holmes data. Detected two days later. <strong>BIS team</strong> conducting in-depth analysis. Engineering dashboard under evaluation for QuickSight migration.</p>
-      </div>
-    </div>
-    <div class="note amber">
-      <strong>Action:</strong> Existing control (Engineering dashboard) that flags cases without reporting receipts is being evaluated by the BIS team to enable migration to the QuickSight platform.
-    </div>
-  </div>
-
-  <!-- 9: Sanctions -->
-  <div class="slide" data-idx="9">
-    <div class="slide-section-label">MSAC Indicators</div>
-    <h2>Sanctions</h2>
-    <p class="slide-subtitle">Sanction alerts and true matches for ongoing and onboarding monitoring.</p>
-    <div class="chart-grid full">
-      <div class="chart-box"><h3>Sanctions — Alerts & True Match</h3><canvas id="sanctionsChart"></canvas></div>
-    </div>
-  </div>
-
-  <!-- 10: Deliberations -->
-  <div class="slide" data-idx="10">
-    <div class="slide-section-label">Section 4 — MLRO Process</div>
-    <h2>MLRO Deliberations</h2>
-    <p class="slide-subtitle">Cases escalated to MLRO and recurring forum deliberations.</p>
-    <div class="kpi-row">
-      <div class="kpi"><div class="kpi-label">Total Deliberations</div><div class="kpi-val">1</div><div class="kpi-delta down">↓ vs 2 in Feb</div></div>
-      <div class="kpi"><div class="kpi-label">Manual Alerts</div><div class="kpi-val">51</div><div class="kpi-delta down">↓ -32% vs Feb</div></div>
-    </div>
-    <div class="chart-grid">
-      <div class="chart-box"><h3>Alerts Created by MLRO</h3><canvas id="mlroChart"></canvas></div>
-      <div class="chart-box"><h3>Deliberations by Forum</h3><canvas id="forumsChart"></canvas></div>
-    </div>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Forum</th><th>Nov/25</th><th>Dec/25</th><th>Jan/26</th><th>Feb/26</th><th>Mar/26</th></tr></thead>
-        <tbody>
-          <tr><td>AML Exit Mgmt Forum</td><td>1</td><td>0</td><td>2</td><td>0</td><td>0</td></tr>
-          <tr><td>Reputational Risk Commission</td><td>1</td><td>2</td><td>2</td><td>1</td><td>1</td></tr>
-          <tr><td>Sanctions</td><td>1</td><td>2</td><td>0</td><td>0</td><td>0</td></tr>
-          <tr><td>KYC — PEP/Media</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
-          <tr class="total"><td>TOTAL</td><td>3</td><td>5</td><td>5</td><td>2</td><td>1</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- 11: QA -->
-  <div class="slide" data-idx="11">
-    <div class="slide-section-label">MLRO Process</div>
-    <h2>COAF's Report Quality Assurance</h2>
-    <p class="slide-subtitle">Quality evaluation of reports sent to COAF.</p>
-    <div class="kpi-row">
-      <div class="kpi"><div class="kpi-label">QA OPS Team</div><div class="kpi-val" style="color:var(--green)">91.99%</div><div class="kpi-delta up">Above threshold</div></div>
-      <div class="kpi"><div class="kpi-label">QA MLRO Perspective</div><div class="kpi-val" style="color:var(--amber)">80%</div><div class="kpi-delta flat">Satisfactory</div></div>
-      <div class="kpi"><div class="kpi-label">Cases Analyzed</div><div class="kpi-val">249</div><div class="kpi-delta flat">First week only</div></div>
-      <div class="kpi"><div class="kpi-label">Evaluation</div><div class="kpi-val" style="color:var(--green)">✓ OK</div><div class="kpi-delta up">Satisfactory</div></div>
-    </div>
-    <div class="note purple">
-      In January 2026, only <strong>249 cases</strong> were analyzed, all from the first week. This is due to the increase in AML alerts and the task force for regulatory compliance regarding EDD PJ cases. The <strong>Looker dashboard was replaced by QuickSight</strong>.
-    </div>
-  </div>
-
-  <!-- 12: Nubankers -->
-  <div class="slide" data-idx="12">
-    <div class="slide-section-label">MLRO Process</div>
-    <h2>Reports by Nubankers / MLRO</h2>
-    <p class="slide-subtitle">Internal reports of suspicious activities by source.</p>
-    <div class="kpi-row">
-      <div class="kpi"><div class="kpi-label">Total Mar/26</div><div class="kpi-val">115</div><div class="kpi-delta up">↑ +1.8%</div></div>
-      <div class="kpi"><div class="kpi-label">AML Gov / MLRO</div><div class="kpi-val">51</div><div class="kpi-delta down">↓ vs 75</div></div>
-      <div class="kpi"><div class="kpi-label">Google Forms</div><div class="kpi-val">26</div><div class="kpi-delta up">↑ vs 17</div></div>
-      <div class="kpi"><div class="kpi-label">Conta Global</div><div class="kpi-val">23</div><div class="kpi-delta up">↑ vs 13</div></div>
-    </div>
-    <div class="chart-grid full">
-      <div class="chart-box"><h3>Internal Reports by Source</h3><canvas id="nubChart"></canvas></div>
-    </div>
-    <div class="note purple">
-      According to the new media-handling process, the number of cases opened by MLRO tends to decrease. MLRO will alert and open macro tasks with OPS (by forms) but will no longer manually open cases.
-    </div>
-  </div>
-
-  <!-- 13: Governance -->
-  <div class="slide" data-idx="13">
-    <div class="slide-section-label">Governance</div>
-    <h2>Financial Crime Risks</h2>
-    <p class="slide-subtitle">Governance structure and MLRO mandate.</p>
-    <div class="cards-grid single">
-      <div class="card" style="text-align:center;padding:48px;">
-        <div style="width:72px;height:72px;border-radius:50%;background:var(--nu-bg);display:inline-flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:16px;">⚖️</div>
-        <h3 style="font-size:20px;margin-bottom:8px;">Roger Miura</h3>
-        <p style="font-size:14px;color:var(--nu);font-weight:600;margin-bottom:16px;">AML Expert — MLRO</p>
-        <p>The MLRO is part of the Financial Crime Risks structure and operates under the delegation of the Responsible Director for AML/CTF as outlined in <strong>Circular Letter 3,978</strong> and <strong>CVM Resolution 50</strong>.</p>
-        <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);font-size:12px;color:var(--text-muted);">
-          MLRO Report is a monthly document that consolidates the main topics, indicators, and highlights of AML/CFT activities, aimed at keeping the Board informed about the most relevant matters.
+        <p>Presented governance structure, AML processes, and strategic projects. Created fronts for technical collaboration.</p>
+        <div style="margin-top:10px;padding:10px 12px;background:var(--nu-bg);border-radius:8px;font-size:11.5px">
+          <strong style="color:var(--nu)">New Tag:</strong> <code style="background:#fff;padding:2px 7px;border-radius:4px;font-size:10.5px">riscoaltocoaf</code>
+          <span style="color:var(--text-sec)"> — Applied to high-risk approved reports.</span>
         </div>
       </div>
     </div>
@@ -853,138 +398,186 @@
 
 </div>
 
-<div class="kb-hint">Navigate: <kbd>←</kbd> <kbd>→</kbd> arrow keys</div>
-
 <script>
 const M = ['Jul/25','Aug/25','Sep/25','Oct/25','Nov/25','Dec/25','Jan/26','Feb/26','Mar/26'];
 const MS = ['Nov/25','Dec/25','Jan/26','Feb/26','Mar/26'];
-const nu='#820AD1', nl='#A945E8', gr='#16A34A', rd='#DC2626', am='#D97706', bl='#2563EB', cy='#06B6D4';
+const nu='#820AD1',nl='#A945E8',gr='#16A34A',rd='#DC2626',am='#D97706',bl='#2563EB',cy='#06B6D4';
+
+const D = {
+  pepOnb: [3105,2875,3026,3132,2760,2809,3339,2653,2997],
+  pepOng: [2019,2184,2857,2632,5207,4478,2861,2554,2399],
+  pepTotal: [5124,5059,5883,5764,7967,7287,6200,5207,5396],
+  rejOnb: [79,54,86,71,79,71,94,96,69],
+  rejOng: [3,4,2,9,8,24,32,3,3],
+  rejTotal: [82,58,88,80,87,95,126,99,72],
+  hlRelOnb: [63,56,60,47,61,62,73,64,74],
+  hlTitOnb: [3,8,6,14,12,7,14,7,5],
+  hlRelOng: [74,55,155,49,146,126,116,110,93],
+  hlTitOng: [1,0,1,1,7,17,5,3,3],
+  hlTotal: [141,119,222,111,226,212,208,184,175],
+  sanOnb: [44,44,67,60,60,1358,51,51,140],
+  sanOng: [30,166,124,89,80,3163,6,5,119],
+  tmOnb: [0,5,1,1,0,1,0,0,2],
+  tmOng: [1,2,2,1,0,3,0,0,0],
+  nubOps: [1,3,9,1,2,0,0,1,0],
+  nubFraude: [20,7,13,6,4,8,2,3,4],
+  nubAML: [26,88,160,108,43,62,39,75,51],
+  nubForms: [11,21,19,16,19,23,7,17,26],
+  nubGlobal: [0,0,3,14,8,31,16,13,23],
+  nubOficios: [0,0,3,13,24,54,34,4,11],
+  nubCripto: [0,0,1,1,0,0,0,0,0],
+  nubTotal: [58,119,208,159,100,178,98,113,115],
+  mlroAlerts: [43,62,39,75,51],
+  forumExit: [0,0,2,0,0],
+  forumRep: [2,2,2,1,1],
+  forumSan: [2,0,0,0,0],
+  forumKYC: [1,1,1,1,0]
+};
 
 Chart.defaults.color = '#9999AA';
 Chart.defaults.borderColor = '#E8E8EE';
-Chart.defaults.font.family = "'Inter', sans-serif";
+Chart.defaults.font.family = "'Inter',sans-serif";
 Chart.defaults.font.size = 11;
 Chart.defaults.plugins.legend.labels.usePointStyle = true;
 Chart.defaults.plugins.legend.labels.pointStyleWidth = 8;
 
-let current = 0;
-const slides = document.querySelectorAll('.slide');
-const thumbs = document.querySelectorAll('.thumb-item');
-const total = slides.length;
-const chartsInit = {};
+const gridC = '#F0F0F5';
+const opts = (stacked=false) => ({
+  responsive:true, maintainAspectRatio:true,
+  plugins:{legend:{position:'bottom',labels:{padding:12}}},
+  scales:{y:{beginAtZero:true,stacked,grid:{color:gridC}},x:{stacked,grid:{display:false}}}
+});
+const lineOpts = () => ({
+  responsive:true, maintainAspectRatio:true,
+  plugins:{legend:{position:'bottom',labels:{padding:12}}},
+  scales:{y:{beginAtZero:false,grid:{color:gridC}},x:{grid:{display:false}}}
+});
 
-function goSlide(idx) {
-  if (idx < 0 || idx >= total) return;
-  slides[current].classList.remove('active');
-  thumbs[current].classList.remove('active');
-  current = idx;
-  slides[current].classList.add('active');
-  thumbs[current].classList.add('active');
-  thumbs[current].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-  document.getElementById('counter').textContent = (current + 1) + ' / ' + total;
-  document.getElementById('progress').style.width = ((current + 1) / total * 100) + '%';
-  document.getElementById('prevBtn').disabled = current === 0;
-  document.getElementById('nextBtn').disabled = current === total - 1;
-  initCharts(current);
+function ds(label,data,color,type='bar',opts={}){
+  const base = {label,data,borderRadius:4,...opts};
+  if(type==='bar') return {...base,backgroundColor:color};
+  if(type==='line') return {...base,borderColor:color,backgroundColor:color+'18',fill:true,tension:.4,pointRadius:3,borderWidth:2};
+  if(type==='linePlain') return {...base,borderColor:color,backgroundColor:'transparent',tension:.4,pointRadius:4,borderWidth:2.5,type:'line'};
+  return base;
 }
 
-thumbs.forEach(t => t.addEventListener('click', () => goSlide(+t.dataset.slide)));
+/* ── Overview Charts ── */
+new Chart(document.getElementById('overviewPepChart'),{type:'line',data:{labels:M,datasets:[
+  ds('Total PEP',D.pepTotal,nu,'line'),
+]},options:lineOpts()});
 
-document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); goSlide(current + 1); }
-  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); goSlide(current - 1); }
+new Chart(document.getElementById('overviewNubChart'),{type:'bar',data:{labels:M,datasets:[
+  ds('Total Reports',D.nubTotal,nu+'CC'),
+]},options:{...opts(),plugins:{legend:{display:false}}}});
+
+new Chart(document.getElementById('overviewSanChart'),{type:'bar',data:{labels:M,datasets:[
+  ds('Onboarding',D.sanOnb,am+'CC'),
+  ds('Ongoing',D.sanOng,rd+'CC'),
+]},options:opts()});
+
+new Chart(document.getElementById('overviewRejChart'),{type:'line',data:{labels:M,datasets:[
+  ds('Rejected Total',D.rejTotal,rd,'line'),
+]},options:lineOpts()});
+
+/* ── PEP Charts ── */
+new Chart(document.getElementById('pepBarChart'),{type:'bar',data:{labels:M,datasets:[
+  ds('Onboarding',D.pepOnb,nu+'CC'),
+  ds('Ongoing',D.pepOng,nl+'88'),
+]},options:opts()});
+
+new Chart(document.getElementById('pepLineChart'),{type:'line',data:{labels:M,datasets:[
+  ds('Total',D.pepTotal,nu,'line'),
+  {label:'9M Avg',data:Array(9).fill(Math.round(D.pepTotal.reduce((a,b)=>a+b)/9)),borderColor:'#ccc',borderDash:[6,4],borderWidth:1.5,pointRadius:0,fill:false},
+]},options:lineOpts()});
+
+new Chart(document.getElementById('pepRejChart'),{type:'bar',data:{labels:M,datasets:[
+  ds('Rejected Onb',D.rejOnb,rd+'CC'),
+  ds('Rejected Ong',D.rejOng,am+'CC'),
+  ds('Total',D.rejTotal,nu,'linePlain'),
+]},options:opts()});
+
+/* ── PEP High Level Charts ── */
+new Chart(document.getElementById('hlTrendChart'),{type:'line',data:{labels:M,datasets:[
+  ds('Total HL',D.hlTotal,nu,'line'),
+  {label:'9M Avg',data:Array(9).fill(Math.round(D.hlTotal.reduce((a,b)=>a+b)/9)),borderColor:'#ccc',borderDash:[6,4],borderWidth:1.5,pointRadius:0,fill:false},
+]},options:lineOpts()});
+
+new Chart(document.getElementById('hlBreakChart'),{type:'bar',data:{labels:M,datasets:[
+  ds('Related Onb',D.hlRelOnb,bl+'CC'),
+  ds('Titular Onb',D.hlTitOnb,cy+'CC'),
+  ds('Related Ong',D.hlRelOng,nu+'88'),
+  ds('Titular Ong',D.hlTitOng,am+'CC'),
+]},options:opts(true)});
+
+new Chart(document.getElementById('hlPosChart'),{type:'bar',data:{labels:['Senador','Governor','Vice Gov.','President','Vice Pres.'],datasets:[
+  ds('Tit. Onb',[1,0,0,0,0],bl),ds('Tit. Ong',[0,0,1,0,0],cy),
+  ds('Rel. Onb',[10,3,1,2,1],nu),ds('Rel. Ong',[6,3,2,0,1],nl),
+]},options:{indexAxis:'y',responsive:true,plugins:{legend:{position:'bottom'}},scales:{x:{stacked:true,grid:{color:gridC}},y:{stacked:true,grid:{display:false}}}}});
+
+/* ── Sanctions Chart ── */
+new Chart(document.getElementById('sanctionsFullChart'),{type:'bar',data:{labels:M,datasets:[
+  ds('Alerts Onb',D.sanOnb,am+'CC'),
+  ds('Alerts Ong',D.sanOng,rd+'CC'),
+  ds('TM Onb',D.tmOnb,gr,'linePlain',{yAxisID:'y1'}),
+  ds('TM Ong',D.tmOng,cy,'linePlain',{yAxisID:'y1'}),
+]},options:{responsive:true,plugins:{legend:{position:'bottom'}},scales:{
+  y:{beginAtZero:true,grid:{color:gridC}},
+  y1:{position:'right',beginAtZero:true,grid:{display:false},title:{display:true,text:'True Match'}},
+  x:{grid:{display:false}}
+}}});
+
+/* ── Nubanker Charts ── */
+new Chart(document.getElementById('nubTrendChart'),{type:'line',data:{labels:M,datasets:[
+  ds('Total',D.nubTotal,nu,'line'),
+  {label:'9M Avg',data:Array(9).fill(Math.round(D.nubTotal.reduce((a,b)=>a+b)/9)),borderColor:'#ccc',borderDash:[6,4],borderWidth:1.5,pointRadius:0,fill:false},
+]},options:lineOpts()});
+
+new Chart(document.getElementById('nubStackChart'),{type:'bar',data:{labels:M,datasets:[
+  ds('Ops Defense',D.nubOps,'#E040FB'),
+  ds('Fraude',D.nubFraude,rd+'CC'),
+  ds('AML Gov/MLRO',D.nubAML,nu),
+  ds('Google Forms',D.nubForms,bl),
+  ds('Conta Global',D.nubGlobal,cy+'88'),
+  ds('Ofícios',D.nubOficios,am+'88'),
+]},options:opts(true)});
+
+/* ── Deliberations Charts ── */
+new Chart(document.getElementById('mlroAlertChart'),{type:'bar',data:{labels:MS,datasets:[
+  {label:'MLRO Alerts',data:D.mlroAlerts,backgroundColor:D.mlroAlerts.map((_,i)=>i===4?nu:nu+'77'),borderRadius:6},
+]},options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:gridC}},x:{grid:{display:false}}}}});
+
+new Chart(document.getElementById('forumsChart'),{type:'bar',data:{labels:MS,datasets:[
+  ds('AML Exit',D.forumExit,bl+'CC'),
+  ds('Reputational',D.forumRep,nu+'CC'),
+  ds('Sanctions',D.forumSan,rd+'88'),
+  ds('KYC-PEP',D.forumKYC,am+'CC'),
+]},options:opts(true)});
+
+/* ── Navigation ── */
+document.querySelectorAll('.nav-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    item.classList.add('active');
+    const target = document.getElementById(item.dataset.target);
+    if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+  });
 });
 
-let touchStartX = 0;
-document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
-document.addEventListener('touchend', e => {
-  const diff = touchStartX - e.changedTouches[0].clientX;
-  if (Math.abs(diff) > 60) goSlide(current + (diff > 0 ? 1 : -1));
-});
-
-function initCharts(idx) {
-  if (chartsInit[idx]) return;
-  chartsInit[idx] = true;
-
-  const gridC = '#F0F0F5';
-  const opts = (stacked) => ({
-    responsive: true,
-    maintainAspectRatio: true,
-    plugins: { legend: { position: 'bottom', labels: { padding: 12 } } },
-    scales: {
-      y: { beginAtZero: true, stacked, grid: { color: gridC } },
-      x: { stacked, grid: { display: false } }
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      const nav = document.querySelector(`.nav-item[data-target="${e.target.id}"]`);
+      if(nav) nav.classList.add('active');
     }
   });
+}, {rootMargin:'-80px 0px -60% 0px',threshold:0.1});
 
-  if (idx === 5) {
-    new Chart(document.getElementById('pepChart'), { type:'bar', data:{ labels:M, datasets:[
-      { label:'Onboarding', data:[3105,2875,3026,3132,2760,2809,3339,2653,2997], backgroundColor:nu+'CC', borderRadius:4 },
-      { label:'Ongoing', data:[2019,2184,2857,2632,5207,4478,2861,2554,2399], backgroundColor:nl+'88', borderRadius:4 }
-    ]}, options: opts(false) });
+document.querySelectorAll('.section').forEach(s => observer.observe(s));
 
-    new Chart(document.getElementById('hlChart'), { type:'bar', data:{ labels:M, datasets:[
-      { label:'Related Onb', data:[63,56,60,47,61,62,73,64,74], backgroundColor:bl+'CC', borderRadius:3 },
-      { label:'Titular Onb', data:[3,8,6,14,12,7,14,7,5], backgroundColor:cy+'CC', borderRadius:3 },
-      { label:'Related Ong', data:[74,55,155,49,146,126,116,110,93], backgroundColor:nu+'88', borderRadius:3 },
-      { label:'Titular Ong', data:[1,0,1,1,7,17,5,3,3], backgroundColor:am+'CC', borderRadius:3 }
-    ]}, options: opts(true) });
-  }
-
-  if (idx === 6) {
-    new Chart(document.getElementById('posChart'), { type:'bar', data:{ labels:['Senador','Governor','Vice President','Vice Governor','President'], datasets:[
-      { label:'Titular Onb', data:[1,0,0,0,0], backgroundColor:bl },
-      { label:'Titular Ong', data:[0,0,0,1,0], backgroundColor:cy },
-      { label:'Related Onb', data:[10,3,1,1,2], backgroundColor:nu },
-      { label:'Related Ong', data:[6,3,1,2,0], backgroundColor:nl }
-    ]}, options:{ indexAxis:'y', responsive:true, plugins:{ legend:{ position:'bottom' } }, scales:{ x:{ stacked:true, grid:{ color:gridC } }, y:{ stacked:true, grid:{ display:false } } } } });
-
-    new Chart(document.getElementById('rejChart'), { type:'line', data:{ labels:M, datasets:[
-      { label:'Rejected Onb', data:[79,54,86,71,79,71,94,96,69], borderColor:rd, backgroundColor:rd+'18', fill:true, tension:.4 },
-      { label:'Rejected Ong', data:[3,4,2,9,8,24,32,3,3], borderColor:am, backgroundColor:am+'18', fill:true, tension:.4 }
-    ]}, options: opts(false) });
-  }
-
-  if (idx === 9) {
-    new Chart(document.getElementById('sanctionsChart'), { type:'bar', data:{ labels:M.slice(0,8), datasets:[
-      { label:'Alerts Ongoing', data:[110,1,8,151,103,66,59,16], backgroundColor:rd+'CC', borderRadius:4 },
-      { label:'Alerts Onboarding', data:[12,14,44,44,67,60,60,5], backgroundColor:am+'CC', borderRadius:4 },
-      { label:'TM Onboarding', data:[1,4,0,5,1,1,0,2], type:'line', borderColor:gr, backgroundColor:'transparent', yAxisID:'y1' },
-      { label:'TM Ongoing', data:[2,0,1,1,2,1,2,2], type:'line', borderColor:cy, backgroundColor:'transparent', yAxisID:'y1' }
-    ]}, options:{ responsive:true, plugins:{ legend:{ position:'bottom' } }, scales:{
-      y:{ beginAtZero:true, grid:{ color:gridC } },
-      y1:{ position:'right', beginAtZero:true, grid:{ display:false }, title:{ display:true, text:'True Match', color:'#9999AA' } },
-      x:{ grid:{ display:false } }
-    } } });
-  }
-
-  if (idx === 10) {
-    new Chart(document.getElementById('mlroChart'), { type:'bar', data:{ labels:MS, datasets:[
-      { label:'Alerts by MLRO', data:[43,62,39,75,51], backgroundColor:[nu+'88',nu+'88',nu+'88',nu+'88',nu], borderRadius:6 }
-    ]}, options:{ responsive:true, plugins:{ legend:{ display:false } }, scales:{ y:{ beginAtZero:true, grid:{ color:gridC } }, x:{ grid:{ display:false } } } } });
-
-    new Chart(document.getElementById('forumsChart'), { type:'bar', data:{ labels:MS, datasets:[
-      { label:'AML Exit', data:[1,0,2,0,0], backgroundColor:bl+'CC', borderRadius:3 },
-      { label:'Reputational Risk', data:[1,2,2,1,1], backgroundColor:nu+'CC', borderRadius:3 },
-      { label:'Sanctions', data:[1,2,0,0,0], backgroundColor:rd+'88', borderRadius:3 },
-      { label:'KYC-PEP/Media', data:[0,1,1,1,0], backgroundColor:am+'CC', borderRadius:3 }
-    ]}, options: opts(true) });
-  }
-
-  if (idx === 12) {
-    new Chart(document.getElementById('nubChart'), { type:'bar', data:{ labels:M, datasets:[
-      { label:'Ops Defense', data:[1,3,9,1,2,0,0,1,0], backgroundColor:'#E040FB' },
-      { label:'Fraude', data:[20,7,13,6,4,8,2,3,4], backgroundColor:rd+'CC' },
-      { label:'AML Gov/MLRO', data:[26,88,160,108,43,62,39,75,51], backgroundColor:nu },
-      { label:'Google Forms', data:[11,21,19,16,19,23,7,17,26], backgroundColor:bl },
-      { label:'Conta Global', data:[0,0,3,14,8,31,16,13,23], backgroundColor:cy+'88' },
-      { label:'Ofícios Judiciais', data:[0,0,3,13,24,54,34,4,11], backgroundColor:am+'88' },
-      { label:'Cripto', data:[0,0,1,1,0,0,0,0,0], backgroundColor:gr+'66' }
-    ]}, options: opts(true) });
-  }
+function highlightMonth(idx) {
+  /* Future: filter charts to highlight selected month */
 }
-
-goSlide(0);
 </script>
 </body>
 </html>

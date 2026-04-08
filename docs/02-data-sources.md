@@ -4,16 +4,23 @@
 
 ```
 Databricks Notebook ──┐
-                      ├──▶ Google Sheets ──▶ Google Slides
+                      ├──▶ Google Sheets "MLRO Monthly Report" ──▶ Google Slides
 Jira AMLD Export ─────┘         │
-                                ▼
-                        QuickSight Dashboard
-                        (gráficos embedados)
+                                │
+Planilha "Dossiê SPA" ─────────┤
+                                │
+QuickSight Dashboard ───────────┘ (screenshots/embeds nos slides)
+                                │
+PlayVox (QA system) ────────────┘
 ```
 
 ## 1. Databricks Notebook
 
-**Fonte primária de métricas automatizadas.**
+**Fonte primária de métricas automatizadas (PEP, Sanctions, etc.).**
+
+- **Workspace**: `nubank-e2-general.cloud.databricks.com`
+- **Notebook ID**: `1971106302956783`
+- **URL**: https://nubank-e2-general.cloud.databricks.com/editor/notebooks/1971106302956783?o=2093534396923660
 
 O notebook roda queries contra tabelas do Databricks e popula a aba `tbl_Databricks` da planilha.
 
@@ -25,11 +32,11 @@ O notebook roda queries contra tabelas do Databricks e popula a aba `tbl_Databri
 - Big Picture (NuPag, NuInvest, NuCrypto × Reported/Clear/Canceled)
 - Cases Escalated
 
-### Atualização:
+### Fluxo:
 1. Rodar o notebook no Databricks
 2. Dados fluem para `tbl_Databricks`
 3. Tab `m__data` processa automaticamente
-4. Tab `output_automatics` gera os gráficos
+4. Tab `output_automatics` gera os gráficos (linkados ao Google Slides)
 
 ## 2. Jira (Projeto AMLD)
 
@@ -66,20 +73,42 @@ O notebook roda queries contra tabelas do Databricks e popula a aba `tbl_Databri
 | `output_automatics` | Gráficos que atualizam automaticamente |
 | `output_manuals` | Gráficos que precisam de input manual |
 
-## 4. QuickSight Dashboard
+## 4. Planilha "Dossiê SPA Gerados — Acompanhamento"
+
+**Spreadsheet ID**: `1di9PJLWHjufFoe2MhXi1dayYHFkYEkKF4QnF1dUbzSQ`
+**URL**: https://docs.google.com/spreadsheets/d/1di9PJLWHjufFoe2MhXi1dayYHFkYEkKF4QnF1dUbzSQ
+
+Fonte de dados para o **Slide 18 (SPA Reports)**. Contagem de CIDs únicos por mês.
+
+| Tab | Slide 18 Chart | Descrição |
+|-----|----------------|-----------|
+| `CIDs SPA (PJ)` | PJ | Dossiês SPA de PJs por CNPJ |
+| `CIDs SPA (PJ) Fonética` | PJ Phonetics | PJs detectados por fonética do nome |
+| `CIDs SPA (PF)` | PF | Dossiês SPA de PFs |
+| `Contrapartes SPA` | Counterparties | Contrapartes identificadas |
+| `Consolidado` | — | Visão consolidada de todos os dossiês |
+| `Resume CIDs SPA (PJ)` | — | Resumo PJ |
+| `Resume CIDs SPA (PJ) Fonética` | — | Resumo PJ Fonética |
+| `Resume CIDs SPA (PF)` | — | Resumo PF |
+
+## 5. QuickSight Dashboard
 
 **Dashboard ID**: `35046a00-8bd2-438b-b9f1-b9616121178e`
 **Sheet ID**: `35046a00-8bd2-438b-b9f1-b9616121178e_eb2dc5e1-15ba-4595-822d-25287d7a0523`
 **Account**: `nu-qs-prod`
+**URL**: https://us-east-1.quicksight.aws.amazon.com/sn/account/nu-qs-prod/dashboards/35046a00-8bd2-438b-b9f1-b9616121178e
 
-A maioria dos gráficos do report vem deste dashboard. Os charts são embedados ou screenshot nos slides.
+Charts dos slides (screenshots/embeds):
+- EDD PF/PJ queues (slides 10-11)
+- PEP High Level Positions (slide 13)
+- Effectiveness of Alerts — NuPag, NuInvest, NuCrypto (slides 15-17)
+- Report Breaches 24h (slide 19)
+- Sanctions (slide 20)
+- MLRO Deliberations — KPIs + donut + stacked bar (slide 22)
 
-### Charts conhecidos:
-- EDD PF/PJ queues
-- Effectiveness of Alerts (NuPag, NuInvest, NuCrypto)
-- SPA Reports (PJ, PF, Counterparties)
-- Report Breaches 24h
-- QA Reports COAF (migrado de Looker)
+## 6. PlayVox (QA System)
+
+Fonte para parte do **Slide 24 (QA COAF)**. O scorecard "Quality stats" e "Nota de Quality do mês" vêm do sistema PlayVox, que calcula o percentual de qualidade automaticamente via scorecards.
 
 ## 5. Google Slides — Apresentação Final
 
