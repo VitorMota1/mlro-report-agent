@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Data (sensitive)
+data/*.csv
+data/*.xlsx
+data/*.json
+!data/.gitkeep
+
+# Notebooks checkpoints
+.ipynb_checkpoints/
