@@ -131,6 +131,10 @@ table .total td{font-weight:700;color:var(--text);background:var(--nu-bg)}
   <div class="nav-section">Dashboard</div>
   <div class="nav-item active" data-target="overview"><div class="nav-icon">📊</div>Executive Overview</div>
 
+  <div class="nav-section">Highlights</div>
+  <div class="nav-item" data-target="operations"><div class="nav-icon">🔴</div>Operations</div>
+  <div class="nav-item" data-target="process"><div class="nav-icon">🔄</div>Process & Rules</div>
+
   <div class="nav-section">Customers</div>
   <div class="nav-item" data-target="pep"><div class="nav-icon">🏛️</div>PEP Analysis</div>
   <div class="nav-item" data-target="pep-hl"><div class="nav-icon">⭐</div>PEP High Level</div>
@@ -144,10 +148,6 @@ table .total td{font-weight:700;color:var(--text);background:var(--nu-bg)}
   <div class="nav-section">MLRO Process</div>
   <div class="nav-item" data-target="deliberations"><div class="nav-icon">⚖️</div>Deliberations</div>
   <div class="nav-item" data-target="qa"><div class="nav-icon">✅</div>QA COAF</div>
-
-  <div class="nav-section">Highlights</div>
-  <div class="nav-item" data-target="operations"><div class="nav-icon">🔴</div>Operations</div>
-  <div class="nav-item" data-target="process"><div class="nav-icon">🔄</div>Process & Rules</div>
 </nav>
 
 <div class="main">
@@ -174,6 +174,116 @@ table .total td{font-weight:700;color:var(--text);background:var(--nu-bg)}
     <div class="chart-row">
       <div class="chart-box"><h3>Sanctions Alerts — Trend <span class="tag">9 months</span></h3><canvas id="overviewSanChart"></canvas></div>
       <div class="chart-box"><h3>PEP Rejected — Trend <span class="tag">9 months</span></h3><canvas id="overviewRejChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ══════ OPERATIONS ══════ -->
+  <div class="section" id="operations">
+    <div class="section-label">Highlights — March 2026</div>
+    <h2>Relevant Operations targeted by MLRO</h2>
+    <p class="section-sub">Survey and processing of the main operations of the federal police involving financial crimes and criminal factions.</p>
+
+    <div class="cards-grid">
+      <div class="card" style="border-left:3px solid var(--red)">
+        <div class="card-header"><div class="card-icon red">🔴</div><h3>Contra Deputados</h3><span class="badge ok">Done</span></div>
+        <p>Federal Police operation (authorized by STF) against deputies <strong>Sóstenes Cavalcante</strong> and <strong>Carlos Jordy</strong> — suspected shell car rental company to divert parliamentary allowance funds. Suspicious transactions estimated at <strong>~R$ 27.8 million</strong>.</p>
+        <div class="chips"><span class="chip clear">Clear: 3</span><span class="chip canceled">Canceled: 11</span><span class="chip reported">Rep. & Canc.: 1</span></div>
+      </div>
+      <div class="card" style="border-left:3px solid var(--red)">
+        <div class="card-header"><div class="card-icon red">🔴</div><h3>Dark Trader</h3><span class="badge ok">Done</span></div>
+        <p>Launched Feb 12, 2026 — joint action by <strong>SP Civil Police, MPSP & Dept. of Finance</strong> to dismantle a <strong>billion-real money-laundering scheme</strong>.</p>
+        <div class="chips"><span class="chip clear">Clear: 4</span><span class="chip canceled">Canceled: 9</span><span class="chip reported">Reported: 1</span><span class="chip mixed">Escalated: 6</span></div>
+      </div>
+      <div class="card" style="border-left:3px solid var(--red)">
+        <div class="card-header"><div class="card-icon red">🔴</div><h3>Relacionados da PF</h3><span class="badge ok">Done</span></div>
+        <p>Complaint originating from <strong>COAF</strong> — an assumption without proven facts. File with 59 names sent; among those, only 3 had related negative media coverage.</p>
+        <div class="chips"><span class="chip clear">Clear: 1</span><span class="chip reported">Reported: 57</span><span class="chip reported">Rep. & Canc.: 1</span></div>
+      </div>
+      <div class="card" style="border-left:3px solid var(--red)">
+        <div class="card-header"><div class="card-icon red">🔴</div><h3>Narco Azimut</h3><span class="badge ok">Done</span></div>
+        <p>7 search and arrest warrants issued by the 5th Federal Court in Santos/SP, across multiple cities (Santos, Ferraz de Vasconcelos, SBC, SJC, Goiânia, Búzios).</p>
+        <div class="chips"><span class="chip clear">Clear: 4</span><span class="chip canceled">Canceled: 1</span><span class="chip reported">Rep. & Canc.: 3</span></div>
+      </div>
+    </div>
+
+    <div class="cards-grid">
+      <div class="card" style="border-left:3px solid var(--amber)">
+        <div class="card-header"><div class="card-icon amber">🟠</div><h3>Operação Sem Desconto</h3><span class="badge ok">Done</span></div>
+        <p>PF forensic analysis: <strong>Conafer received ~R$ 708M from INSS</strong>, of which ~R$ 640M allegedly diverted to shell companies — center of the "Sem Descontos" unauthorized pension deductions scheme.</p>
+        <div class="chips"><span class="chip clear">Clear: 4</span><span class="chip canceled">Canceled: 1</span><span class="chip reported">Reported: 3</span><span class="chip reported">Rep. & Canc.: 11</span></div>
+      </div>
+      <div class="card" style="border-left:3px solid var(--amber)">
+        <div class="card-header"><div class="card-icon amber">🟠</div><h3>Contratos Milionários</h3><span class="badge ok">Done</span></div>
+        <p>Companies suspected of laundering <strong>PCC money</strong> with million-real city hall contracts. Key individual Thiago Telles Batista de Souza holds an account — assessing connected companies.</p>
+        <div class="chips"><span class="chip clear">Clear: 3</span><span class="chip canceled">Canceled: 3</span></div>
+      </div>
+      <div class="card" style="border-left:3px solid var(--amber)">
+        <div class="card-header"><div class="card-icon amber">🟠</div><h3>Rainha do Sul</h3><span class="badge ok">Done</span></div>
+        <p>Major Bahia Civil Police action (Nov 2025) — dismantling high-level criminal network involved in <strong>drug trafficking, extortion, and money laundering</strong>.</p>
+        <div class="chips"><span class="chip canceled">Canceled: 9</span><span class="chip reported">Rep. & Canc.: 4</span></div>
+      </div>
+      <div class="card" style="border-left:3px solid var(--blue)">
+        <div class="card-header"><div class="card-icon blue">📋</div><h3>MJ Wanted List</h3><span class="badge ok">Done</span></div>
+        <p>Survey of Ministry of Justice's Most Wanted. <strong>100% high-risk</strong> clients (criminal org., drug trafficking, kidnapping). High cancellation rate, low financial capacity. 3 reported+canceled (no prior alerts), 3 judicial freezes.</p>
+      </div>
+    </div>
+
+    <div class="cards-grid">
+      <div class="card" style="border-left:3px solid var(--blue)">
+        <div class="card-header"><div class="card-icon blue">🔵</div><h3>Núcleo Político CV no AM</h3><span class="badge ok">Done</span></div>
+        <p><strong>Comando Vermelho</strong> scheme with public agents — drugs from Colombia distributed from Amazonas. 8 individuals analyzed.</p>
+        <div class="chips"><span class="chip clear">Clear: 2</span><span class="chip canceled">Canceled: 3</span><span class="chip reported">Rep. & Canc.: 2</span></div>
+      </div>
+      <div class="card" style="border-left:3px solid var(--blue)">
+        <div class="card-header"><div class="card-icon blue">🔵</div><h3>Migalhas</h3><span class="badge ok">Done</span></div>
+        <p>Federal Police + Receita Federal + Internal Affairs PR — dismantling criminal org. involved in <strong>corruption, pesticide smuggling, and money laundering</strong> in western Paraná border region.</p>
+        <div class="chips"><span class="chip clear">Clear: 1</span><span class="chip canceled">Canceled: 7</span></div>
+      </div>
+      <div class="card" style="border-left:3px solid var(--nu)">
+        <div class="card-header"><div class="card-icon purple">⚙️</div><h3>Tasks AML OPS</h3><span class="badge ok">Done</span></div>
+        <p><strong>Legacy U18 cases:</strong> Guardian accounts cancelled (Fraud/AML). <strong>PF multiple PJs:</strong> channel pj-defense.</p>
+        <div class="chips"><span class="chip clear">U18 — Clear: 3, Rep: 5, R&C: 1</span><span class="chip mixed">PJ — Clear: 11, Canc: 2, Rep: 1</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ══════ PROCESS ══════ -->
+  <div class="section" id="process">
+    <div class="section-label">Highlights — March 2026</div>
+    <h2>Process Improvements, Rules & Regulatory</h2>
+    <p class="section-sub">Key process reviews, new rules, regulatory updates, and account reversal management.</p>
+
+    <div class="cards-grid">
+      <div class="card" style="border-left:3px solid var(--amber)">
+        <div class="card-header"><div class="card-icon amber">📜</div><h3>SPA Request — Ordinance 566</h3></div>
+        <p>Meeting held at SPA's request to present key changes to <strong>Ordinance 566</strong>. IFS received the draft and may submit suggestions — <strong>deadline 17/03</strong>. Revisions to document and MSAC items completed.</p>
+      </div>
+      <div class="card" style="border-left:3px solid var(--nu)">
+        <div class="card-header"><div class="card-icon purple">🧠</div><h3>MCA Rule — New Exploratory Alerts</h3></div>
+        <p>Rule developed based on sample analysis of high-risk behaviours (high outbound flows to Global Account, merchant concentration, frequent in-and-out flows). Two new alerts proposed:</p>
+        <div style="margin-top:8px;font-size:11.5px">
+          <div style="display:flex;gap:8px;padding:5px 0;border-bottom:1px solid var(--border-light)"><span class="badge info">MCA High Amount</span><span>Customers transacting above threshold with volumes above income + recurring behavior</span></div>
+          <div style="display:flex;gap:8px;padding:5px 0"><span class="badge info">MCA Round Tripping</span><span>Customers redeeming ≥70% of funds above threshold + recurring behavior</span></div>
+        </div>
+      </div>
+      <div class="card" style="border-left:3px solid var(--blue)">
+        <div class="card-header"><div class="card-icon blue">🔄</div><h3>Account Reversal — Sensitive Cases</h3></div>
+        <p>Management of sensitive account reversal cases linked to Nubank-related parties: <strong>Father of ex-Nubanker (GM)</strong>, Friend of Nubanker (Liquidity risk), and <strong>Cris Junqueira's cases</strong>.</p>
+        <p style="font-size:11px">Documents requested to prove legitimacy — only one account could not be reversed. New MLRO + OPS initiative to revise the <strong>account cancellation matrix</strong> to minimize negative impact.</p>
+      </div>
+      <div class="card" style="border-left:3px solid var(--green)">
+        <div class="card-header"><div class="card-icon green">✅</div><h3>U18 Cancellation Process Review</h3><span class="badge ok">Approved</span></div>
+        <p>Streamlined Under-18 account cancellation process approved:</p>
+        <div style="margin-top:8px;font-size:11.5px">
+          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border-light)"><span><strong>Unified Analyst</strong></span><span class="badge ok">12:08 min per case</span></div>
+          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border-light)"><span><strong>MLRO</strong></span><span class="badge ok">Zero time (exceptions only)</span></div>
+          <div style="display:flex;justify-content:space-between;padding:5px 0"><span><strong>IC4/Spreadsheet</strong></span><span class="badge ok">Zero manual monitoring</span></div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -368,115 +478,6 @@ table .total td{font-weight:700;color:var(--text);background:var(--nu-bg)}
     <div class="note purple">In January 2026, only <strong>249 cases</strong> were analyzed (first week). This is due to the increase in AML alerts and the EDD PJ task force. The <strong>Looker dashboard was replaced by QuickSight</strong>.</div>
   </div>
 
-  <div class="divider"></div>
-
-  <!-- ══════ OPERATIONS ══════ -->
-  <div class="section" id="operations">
-    <div class="section-label">Highlights — March 2026</div>
-    <h2>Relevant Operations targeted by MLRO</h2>
-    <p class="section-sub">Survey and processing of the main operations of the federal police involving financial crimes and criminal factions.</p>
-
-    <div class="cards-grid">
-      <div class="card" style="border-left:3px solid var(--red)">
-        <div class="card-header"><div class="card-icon red">🔴</div><h3>Contra Deputados</h3><span class="badge ok">Done</span></div>
-        <p>Federal Police operation (authorized by STF) against deputies <strong>Sóstenes Cavalcante</strong> and <strong>Carlos Jordy</strong> — suspected shell car rental company to divert parliamentary allowance funds. Suspicious transactions estimated at <strong>~R$ 27.8 million</strong>.</p>
-        <div class="chips"><span class="chip clear">Clear: 3</span><span class="chip canceled">Canceled: 11</span><span class="chip reported">Rep. & Canc.: 1</span></div>
-      </div>
-      <div class="card" style="border-left:3px solid var(--red)">
-        <div class="card-header"><div class="card-icon red">🔴</div><h3>Dark Trader</h3><span class="badge ok">Done</span></div>
-        <p>Launched Feb 12, 2026 — joint action by <strong>SP Civil Police, MPSP & Dept. of Finance</strong> to dismantle a <strong>billion-real money-laundering scheme</strong>.</p>
-        <div class="chips"><span class="chip clear">Clear: 4</span><span class="chip canceled">Canceled: 9</span><span class="chip reported">Reported: 1</span><span class="chip mixed">Escalated: 6</span></div>
-      </div>
-      <div class="card" style="border-left:3px solid var(--red)">
-        <div class="card-header"><div class="card-icon red">🔴</div><h3>Relacionados da PF</h3><span class="badge ok">Done</span></div>
-        <p>Complaint originating from <strong>COAF</strong> — an assumption without proven facts. File with 59 names sent; among those, only 3 had related negative media coverage.</p>
-        <div class="chips"><span class="chip clear">Clear: 1</span><span class="chip reported">Reported: 57</span><span class="chip reported">Rep. & Canc.: 1</span></div>
-      </div>
-      <div class="card" style="border-left:3px solid var(--red)">
-        <div class="card-header"><div class="card-icon red">🔴</div><h3>Narco Azimut</h3><span class="badge ok">Done</span></div>
-        <p>7 search and arrest warrants issued by the 5th Federal Court in Santos/SP, across multiple cities (Santos, Ferraz de Vasconcelos, SBC, SJC, Goiânia, Búzios).</p>
-        <div class="chips"><span class="chip clear">Clear: 4</span><span class="chip canceled">Canceled: 1</span><span class="chip reported">Rep. & Canc.: 3</span></div>
-      </div>
-    </div>
-
-    <div class="cards-grid">
-      <div class="card" style="border-left:3px solid var(--amber)">
-        <div class="card-header"><div class="card-icon amber">🟠</div><h3>Operação Sem Desconto</h3><span class="badge ok">Done</span></div>
-        <p>PF forensic analysis: <strong>Conafer received ~R$ 708M from INSS</strong>, of which ~R$ 640M allegedly diverted to shell companies — center of the "Sem Descontos" unauthorized pension deductions scheme.</p>
-        <div class="chips"><span class="chip clear">Clear: 4</span><span class="chip canceled">Canceled: 1</span><span class="chip reported">Reported: 3</span><span class="chip reported">Rep. & Canc.: 11</span></div>
-      </div>
-      <div class="card" style="border-left:3px solid var(--amber)">
-        <div class="card-header"><div class="card-icon amber">🟠</div><h3>Contratos Milionários</h3><span class="badge ok">Done</span></div>
-        <p>Companies suspected of laundering <strong>PCC money</strong> with million-real city hall contracts. Key individual Thiago Telles Batista de Souza holds an account — assessing connected companies.</p>
-        <div class="chips"><span class="chip clear">Clear: 3</span><span class="chip canceled">Canceled: 3</span></div>
-      </div>
-      <div class="card" style="border-left:3px solid var(--amber)">
-        <div class="card-header"><div class="card-icon amber">🟠</div><h3>Rainha do Sul</h3><span class="badge ok">Done</span></div>
-        <p>Major Bahia Civil Police action (Nov 2025) — dismantling high-level criminal network involved in <strong>drug trafficking, extortion, and money laundering</strong>.</p>
-        <div class="chips"><span class="chip canceled">Canceled: 9</span><span class="chip reported">Rep. & Canc.: 4</span></div>
-      </div>
-      <div class="card" style="border-left:3px solid var(--blue)">
-        <div class="card-header"><div class="card-icon blue">📋</div><h3>MJ Wanted List</h3><span class="badge ok">Done</span></div>
-        <p>Survey of Ministry of Justice's Most Wanted. <strong>100% high-risk</strong> clients (criminal org., drug trafficking, kidnapping). High cancellation rate, low financial capacity. 3 reported+canceled (no prior alerts), 3 judicial freezes.</p>
-      </div>
-    </div>
-
-    <div class="cards-grid">
-      <div class="card" style="border-left:3px solid var(--blue)">
-        <div class="card-header"><div class="card-icon blue">🔵</div><h3>Núcleo Político CV no AM</h3><span class="badge ok">Done</span></div>
-        <p><strong>Comando Vermelho</strong> scheme with public agents — drugs from Colombia distributed from Amazonas. 8 individuals analyzed.</p>
-        <div class="chips"><span class="chip clear">Clear: 2</span><span class="chip canceled">Canceled: 3</span><span class="chip reported">Rep. & Canc.: 2</span></div>
-      </div>
-      <div class="card" style="border-left:3px solid var(--blue)">
-        <div class="card-header"><div class="card-icon blue">🔵</div><h3>Migalhas</h3><span class="badge ok">Done</span></div>
-        <p>Federal Police + Receita Federal + Internal Affairs PR — dismantling criminal org. involved in <strong>corruption, pesticide smuggling, and money laundering</strong> in western Paraná border region.</p>
-        <div class="chips"><span class="chip clear">Clear: 1</span><span class="chip canceled">Canceled: 7</span></div>
-      </div>
-      <div class="card" style="border-left:3px solid var(--nu)">
-        <div class="card-header"><div class="card-icon purple">⚙️</div><h3>Tasks AML OPS</h3><span class="badge ok">Done</span></div>
-        <p><strong>Legacy U18 cases:</strong> Guardian accounts cancelled (Fraud/AML). <strong>PF multiple PJs:</strong> channel pj-defense.</p>
-        <div class="chips"><span class="chip clear">U18 — Clear: 3, Rep: 5, R&C: 1</span><span class="chip mixed">PJ — Clear: 11, Canc: 2, Rep: 1</span></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- ══════ PROCESS ══════ -->
-  <div class="section" id="process">
-    <div class="section-label">Highlights — March 2026</div>
-    <h2>Process Improvements, Rules & Regulatory</h2>
-    <p class="section-sub">Key process reviews, new rules, regulatory updates, and account reversal management.</p>
-
-    <div class="cards-grid">
-      <div class="card" style="border-left:3px solid var(--amber)">
-        <div class="card-header"><div class="card-icon amber">📜</div><h3>SPA Request — Ordinance 566</h3></div>
-        <p>Meeting held at SPA's request to present key changes to <strong>Ordinance 566</strong>. IFS received the draft and may submit suggestions — <strong>deadline 17/03</strong>. Revisions to document and MSAC items completed.</p>
-      </div>
-      <div class="card" style="border-left:3px solid var(--nu)">
-        <div class="card-header"><div class="card-icon purple">🧠</div><h3>MCA Rule — New Exploratory Alerts</h3></div>
-        <p>Rule developed based on sample analysis of high-risk behaviours (high outbound flows to Global Account, merchant concentration, frequent in-and-out flows). Two new alerts proposed:</p>
-        <div style="margin-top:8px;font-size:11.5px">
-          <div style="display:flex;gap:8px;padding:5px 0;border-bottom:1px solid var(--border-light)"><span class="badge info">MCA High Amount</span><span>Customers transacting above threshold with volumes above income + recurring behavior</span></div>
-          <div style="display:flex;gap:8px;padding:5px 0"><span class="badge info">MCA Round Tripping</span><span>Customers redeeming ≥70% of funds above threshold + recurring behavior</span></div>
-        </div>
-      </div>
-      <div class="card" style="border-left:3px solid var(--blue)">
-        <div class="card-header"><div class="card-icon blue">🔄</div><h3>Account Reversal — Sensitive Cases</h3></div>
-        <p>Management of sensitive account reversal cases linked to Nubank-related parties: <strong>Father of ex-Nubanker (GM)</strong>, Friend of Nubanker (Liquidity risk), and <strong>Cris Junqueira's cases</strong>.</p>
-        <p style="font-size:11px">Documents requested to prove legitimacy — only one account could not be reversed. New MLRO + OPS initiative to revise the <strong>account cancellation matrix</strong> to minimize negative impact.</p>
-      </div>
-      <div class="card" style="border-left:3px solid var(--green)">
-        <div class="card-header"><div class="card-icon green">✅</div><h3>U18 Cancellation Process Review</h3><span class="badge ok">Approved</span></div>
-        <p>Streamlined Under-18 account cancellation process approved:</p>
-        <div style="margin-top:8px;font-size:11.5px">
-          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border-light)"><span><strong>Unified Analyst</strong></span><span class="badge ok">12:08 min per case</span></div>
-          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border-light)"><span><strong>MLRO</strong></span><span class="badge ok">Zero time (exceptions only)</span></div>
-          <div style="display:flex;justify-content:space-between;padding:5px 0"><span><strong>IC4/Spreadsheet</strong></span><span class="badge ok">Zero manual monitoring</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
 
 </div>
 
